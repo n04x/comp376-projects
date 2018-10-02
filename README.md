@@ -3,7 +3,7 @@ COMP376 Fall 2018 Video Game Project on Unity
 ### Team Members
 Alexia Soucy: Art Creation Director  
 Earl Steven Aromin: Coding    
-Jesse Tremblay  
+Jesse Tremblay: Level Generation and Visual Effect  
 Marco Tropiano: Main Music Director  
 Tan-Phat Pham: Documentation  
 Thomas Backs: Coding and Documentation  
