@@ -10,9 +10,9 @@ public class Dash : MonoBehaviour
     private Rigidbody2D rb;
     public float dashValue = 5f;
     [SerializeField]
-    const float DASH_DURATION = .1f;
+    float DASH_DURATION = .1f;
     [SerializeField]
-    const float INVINCIBILITY_DURATION = .1f;
+     float INVINCIBILITY_DURATION = .1f;
     float dash_timer;
     float invincibility_timer;
     void Start()

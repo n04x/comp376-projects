@@ -610,6 +610,7 @@ GameObject:
   - component: {fileID: 848236597}
   - component: {fileID: 848236596}
   - component: {fileID: 848236598}
+  - component: {fileID: 848236599}
   m_Layer: 0
   m_Name: Aris
   m_TagString: Untagged
@@ -695,6 +696,7 @@ MonoBehaviour:
   movementSpeed: 200
   isDashing: 0
   isInvincible: 0
+  shieldOut: 0
   lStickDir: {x: 0, y: 0}
   rStickDir: {x: 0, y: 0}
 --- !u!50 &848236597
@@ -731,6 +733,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashValue: 5
+  DASH_DURATION: 0.1
+  INVINCIBILITY_DURATION: 0.1
+--- !u!114 &848236599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848236593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae4f0d8a5361f947b2218d6a0326549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shield: {fileID: 8935799487124569618, guid: 7b79ace1412fb444bac21078e097efc2, type: 3}
+  shield_offset: 0.6
+  MAX_HP: 20
+  SHIELD_DECAY_TICK: 0.1
+  SHIELD_REGEN_TICK: 0.05
 --- !u!1 &2116512580
 GameObject:
   m_ObjectHideFlags: 0

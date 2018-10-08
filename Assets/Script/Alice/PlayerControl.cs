@@ -7,6 +7,8 @@ public class PlayerControl : MonoBehaviour {
 
     public bool isDashing = false;
     public bool isInvincible = false;
+    public bool shieldOut = false;
+
     public Vector2 lStickDir;
     public Vector2 rStickDir;
     // Update is called once per frame
