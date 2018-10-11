@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dash : MonoBehaviour
+public class DashController : MonoBehaviour
 {
     // Start is called before the first frame update
 

@@ -35,6 +35,10 @@ public class ShieldController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(current_hp <= 0 && sh!=null)
+        {
+            Destroy(sh);
+        }
         if (!Input.GetButton("RB"))
         {
             alice.shieldOut = false;
