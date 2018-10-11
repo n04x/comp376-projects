@@ -8,4 +8,8 @@ Marco Tropiano: Sound design & composition
 Tan-Phat Pham: Programming & QA  
 Thomas Backs: Programming & QA  
 ### Settings
-The story takes place in a  near cyberpunk future, you play the role of a hacker named Alice who has accrued gambling debts to a group of shady individuals. Your objective, hack their network, wipe your debt and make a  killing in the process. 
+The story takes place in a near future, in an advanced digital environment.    
+
+### Summary
+A young talented hacker named Alice who enjoys doing penetration testing, has attracted the attention of the wrong kind of people, a dangerous criminal organization who launders money through encrypted online bank transfers between their casinos. They noticed Alice’s skills which allow her to decrypt and uncover their scheme. The crime organization made an offer to her, which she refused. The crime organization doesn’t take ‘No’ for an answer, Alice has no other choice, she must save her life, she must hack into the shady organization database via their network, to uncover their schemes to the world, in order to achieve her goals, no one must stand in her way.
+
