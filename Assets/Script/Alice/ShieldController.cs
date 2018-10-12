@@ -28,11 +28,6 @@ public class ShieldController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void FixedUpdate()
     {
         if(current_hp <= 0 && sh!=null)

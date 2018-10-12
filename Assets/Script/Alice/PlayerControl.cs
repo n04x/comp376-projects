@@ -5,6 +5,7 @@ public class PlayerControl : MonoBehaviour {
 	public float movementSpeed = 2f;
 	 Rigidbody2D rb;
 
+
     public bool isDashing = false;
     public bool isInvincible = false;
     public bool shieldOut = false;
@@ -21,18 +22,18 @@ public class PlayerControl : MonoBehaviour {
 
 	}
 	void FixedUpdate () {
-        if(!isDashing && !isSlashing)
-		ProcessInput ();
+        if (!isDashing && !isSlashing)
+        {
+            ProcessMovementInput();
+        }
 	}
 
-	void ProcessInput(){
+	void ProcessMovementInput(){
 
         //Below are left joystick controls
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-         lStickDir = new Vector2(horizontal, vertical);
+         lStickDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (horizontal != 0 || vertical != 0) { 
+        if (lStickDir.x != 0 || lStickDir.y != 0) { 
         if (lStickDir.magnitude >= 1)
                 lStickDir = lStickDir.normalized;
             lStickDir = lStickDir * movementSpeed * Time.deltaTime;
@@ -40,15 +41,18 @@ public class PlayerControl : MonoBehaviour {
         }
 
         //Right Stick Controls
-        float right_horizontal = Input.GetAxis("RHorizontal");
-        float right_vertical = Input.GetAxis("RVertical");
-        rStickDir = new Vector2(right_horizontal, right_vertical);
-        if (Mathf.Abs(right_horizontal) >= 0.02 || Mathf.Abs(right_vertical) >= 0.02)
+        rStickDir = new Vector2(Input.GetAxis("RHorizontal"), Input.GetAxis("RVertical"));
+        if (Mathf.Abs(rStickDir.x) >= 0.02 || Mathf.Abs(rStickDir.y) >= 0.02)
         {
-            transform.up = (rStickDir);
+            rb.rotation = Mathf.Rad2Deg * Mathf.Atan(-rStickDir.x/rStickDir.y);
+            if (rStickDir.y < 0) // to actually rotate downwards
+                rb.rotation += 180;
         }else if(Mathf.Abs(lStickDir.magnitude) >= 0.4f )
         {
-            transform.up = lStickDir; //movement without rstick
+            rb.rotation = Mathf.Rad2Deg * Mathf.Atan(-lStickDir.x / lStickDir.y);
+            if (lStickDir.y < 0) // to actually rotate downwards
+                rb.rotation += 180;
+           //movement without rstick
         }
        
 

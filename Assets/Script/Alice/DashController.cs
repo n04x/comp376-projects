@@ -24,11 +24,6 @@ public class DashController : MonoBehaviour
         invincibility_timer = INVINCIBILITY_DURATION;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
      void FixedUpdate()
     {
