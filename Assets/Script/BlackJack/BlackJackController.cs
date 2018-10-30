@@ -20,8 +20,18 @@ public class BlackJackController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Z)) {
             Hit();
         }
+        if(Input.GetKeyDown(KeyCode.X)) {
+            Vent();
+        }
     }
 
+    void Vent() {
+        while(player.HasCards) {
+            deck.Push(player.Pop());
+        }
+        blackjack_score = 0;
+        blackjack_text_score.text = "current score: " + blackjack_score;
+    }
     public void Hit() {
         player.Push(deck.Pop());
         blackjack_score = player.HandValue();
