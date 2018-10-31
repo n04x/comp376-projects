@@ -141,15 +141,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ff7d2fea79d65448dfa38c47d8b2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FloorSprite: {fileID: 21300000, guid: 56a996a9ea349554d935b9adbc83a3c1, type: 3}
-  WallSprite: {fileID: 21300002, guid: 56a996a9ea349554d935b9adbc83a3c1, type: 3}
-  CornerSprite: {fileID: 21300000, guid: 56a996a9ea349554d935b9adbc83a3c1, type: 3}
+  FloorSprite: {fileID: 21300000, guid: 588e8052e7e75b04d8d5ca35ba768f72, type: 3}
+  WallSprite: {fileID: 21300002, guid: 588e8052e7e75b04d8d5ca35ba768f72, type: 3}
+  CornerSprite: {fileID: 21300004, guid: 588e8052e7e75b04d8d5ca35ba768f72, type: 3}
   RoomWidth: 15
   RoomHeight: 10
-  FloorWidth: 10
-  FloorHeight: 10
-  MaxRoomCount: 40
-  MaxAttemptCount: 500
+  FloorWidth: 25
+  FloorHeight: 25
+  MaxRoomCount: 100
+  MaxAttemptCount: 5000
 --- !u!4 &170332900
 Transform:
   m_ObjectHideFlags: 0
