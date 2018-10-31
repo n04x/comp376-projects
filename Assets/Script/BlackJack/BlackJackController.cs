@@ -17,10 +17,10 @@ public class BlackJackController : MonoBehaviour
         blackjack_text_score.text = "Current score: " + blackjack_score;
     }
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Z)) {
+        if(Input.GetKeyDown(KeyCode.Z) || Input.GetButtonDown("Y"))  {
             Hit();
         }
-        if(Input.GetKeyDown(KeyCode.X)) {
+        if(Input.GetKeyDown(KeyCode.X) ||Input.GetButtonDown("B")) {
             Vent();
         }
     }
