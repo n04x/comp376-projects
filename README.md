@@ -18,7 +18,7 @@ A young talented hacker named Alice who enjoys doing penetration testing, has at
 LT - Ranged Attack    
   * Shoot bullet in the direction Alice is facing
     
-RT - Melee Attack    
+X - Melee Attack    
   * Slash attack with blade
     
 RB - Shield
@@ -27,4 +27,10 @@ RB - Shield
     
 LB - Dash    
   * Dashes in a short distance in the direction Alice is facing
-  * Can be chained, depending on the number of charge left.
+  * Can be chained, depending on the number of charge left.    
+  
+Y - Draw    
+  * Draw a new card from the deck    
+  
+B - Vent    
+  * Vent the current player deck to get a bonus based on the cards

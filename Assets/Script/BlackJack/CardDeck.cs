@@ -70,14 +70,14 @@ public class CardDeck : MonoBehaviour
             // etc. we can see a pattern, it's pos + 1 = values except for 0
             // and pos 9, 10, 11, 12 are 10 (10, J, Q, K respectively)
             int card_rank = card % 13;
-
+            Debug.Log(card_rank);
             if(card_rank > 0 && card_rank <= 9) {
                 card_rank += 1;
                 total += card_rank;
             } else if(card_rank > 9) {
-                card_rank += 10;
+                card_rank = 10;
                 total += card_rank;
-            } else {
+            } else if(card_rank == 0) {
                 aces++;
             }
         }
@@ -88,7 +88,6 @@ public class CardDeck : MonoBehaviour
                 total += 1;
             }
         }
-
         return total;
     }
 
