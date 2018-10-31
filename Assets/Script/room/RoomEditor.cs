@@ -8,36 +8,26 @@ public class RoomEditor : Editor
 {
     private int propCount = 0;
 
-    public void Awake() {
+    public void Awake()
+    {
         Room room = target as Room;
-        room.CreateWalls();
+        room.Init();
     }
 
   public override void OnInspectorGUI()
   {
     Room room = target as Room;
 
-    EditorGUILayout.BeginHorizontal();
-    GUILayout.Label("Width: ", GUILayout.Width(50));
-    string width = GUILayout.TextField("" + room.dimensions.x, GUILayout.Width(50));
-    EditorGUILayout.EndHorizontal();
-
-    EditorGUILayout.BeginHorizontal();
-    GUILayout.Label("Height: ", GUILayout.Width(50));
-    string heigth = GUILayout.TextField("" + room.dimensions.y, GUILayout.Width(50));
-    EditorGUILayout.EndHorizontal();
-
+    DrawSizeGUI(room);
+    DrawTextureGui(room);
     DrawDoorsGUI(room);
 
-
-    float realWidth;
-    float realHeight;
-    if (float.TryParse(width, out realWidth) && float.TryParse(heigth, out realHeight))
-    {
-      room.dimensions = new Vector2(realWidth, realHeight);
-    }
+    room.CreateWallTextures();
     room.UpdateWalls();
+    room.UpdateWallTextures();
     room.UpdateDoors();
+    room.UpdateFloor();
+    room.UpdateWallTexturesForDoors();
   }
 
   void OnSceneGUI()
@@ -82,7 +72,22 @@ public class RoomEditor : Editor
 
   }
 
-  private void DrawSizeGUI() {
-    //   TODO
+  private void DrawTextureGui(Room room)
+  {
+    GUILayout.Label("\nTextures: ");
+    room.FloorTexture = EditorGUILayout.ObjectField("Floor", room.FloorTexture, typeof(Sprite), false) as Sprite;
+    room.WallTexture = EditorGUILayout.ObjectField("Wall", room.WallTexture, typeof(Sprite), false) as Sprite;
+    room.CornerTexture = EditorGUILayout.ObjectField("Corner", room.CornerTexture, typeof(Sprite), false) as Sprite;
+  }
+
+  private void DrawSizeGUI(Room room) {
+    GUILayout.Label("Sizes: ");
+    room.dimensions.x = EditorGUILayout.FloatField("Height", room.dimensions.x);
+    room.dimensions.y = EditorGUILayout.FloatField("Width", room.dimensions.y);
+    room.Scale = EditorGUILayout.FloatField("Scale", room.Scale);
+    if (room.Scale <= 0)
+    {
+      room.Scale = 1; // make sure scale is always greater than 0
+    }
   }
 }
