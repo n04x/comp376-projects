@@ -1,5 +1,6 @@
 # Alice in Cyberland
 COMP376 Fall 2018 Video Game Project on Unity    
+![My image](/logo.png)    
 ### Team Members
 Alexia Soucy: Art direction & assets  
 Earl Steven Aromin: Project management & programming    
