@@ -80,6 +80,7 @@ public class PlayerControl : MonoBehaviour {
 {
     if (other.gameObject.tag =="Enemy")
     {
+        if(!isInvincible)
         takeDamage();
         Destroy(other.gameObject);
     }
