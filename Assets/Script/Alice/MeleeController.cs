@@ -61,7 +61,7 @@ public class MeleeController : MonoBehaviour
         if (slash_timer > 0)
         {
             slash_timer -= Time.deltaTime;
-
+            
             sw_rb.rotation = Mathf.Lerp(wielder_rb.rotation-sword_rotation,wielder_rb.rotation+ sword_rotation, slash_timer / SLASH_DURATION) ;
         }
         else

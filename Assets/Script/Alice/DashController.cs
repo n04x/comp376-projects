@@ -29,7 +29,7 @@ public class DashController : MonoBehaviour
     {
 
         //Dash
-        if (Input.GetButtonDown("LB") && Mathf.Abs(rb.velocity.magnitude) >= 0.1f)
+        if (!alice.isSlashing&&Input.GetButtonDown("LB") && Mathf.Abs(rb.velocity.magnitude) >= 0.1f)
         {
             alice.isDashing = true;
             alice.isInvincible = true;

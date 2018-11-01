@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - 
   - 
   - Alice
-  - 
-  - 
+  - AliceTools
+  - RangeCheck
   - 
   - 
   - 
@@ -46,4 +47,7 @@ TagManager:
     locked: 0
   - name: Wall
     uniqueID: 4112748569
+    locked: 0
+  - name: Units
+    uniqueID: 95562603
     locked: 0

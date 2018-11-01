@@ -5,6 +5,7 @@ public class PlayerControl : MonoBehaviour {
 	 Rigidbody2D rb;
 
 
+    [SerializeField]public int current_hp,MAX_HP;
     public bool isDashing = false;
     public bool isInvincible = false;
     public bool shieldOut = false;
@@ -15,18 +16,31 @@ public class PlayerControl : MonoBehaviour {
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        current_hp = MAX_HP;
     }
     void Update(){
 
 
 	}
 	void FixedUpdate () {
+        rb.angularVelocity = 0;
         if (!isDashing && !isSlashing)
         {
             ProcessMovementInput();
         }
-	}
 
+        debuggingInput();
+	}
+    void debuggingInput(){
+        if(Input.GetKeyDown(KeyCode.Q))
+        takeDamage();
+       
+    }
+
+    void takeDamage(){
+         HP_UI.damageHeart();
+         current_hp--;
+    }
 	void ProcessMovementInput(){
 
         //Below are left joystick controls
@@ -37,6 +51,9 @@ public class PlayerControl : MonoBehaviour {
                 lStickDir = lStickDir.normalized;
             lStickDir = lStickDir * movementSpeed * Time.deltaTime;
         rb.velocity = lStickDir;
+        }else
+        {
+            rb.velocity = Vector2.zero;
         }
 
         //Right Stick Controls
@@ -53,10 +70,18 @@ public class PlayerControl : MonoBehaviour {
                 rb.rotation += 180;
            //movement without rstick
         }
+
        
 
 
     }
 
-
+    void OnTriggerEnter2D(Collider2D other)
+{
+    if (other.gameObject.tag =="Enemy")
+    {
+        takeDamage();
+        Destroy(other.gameObject);
+    }
+}
 }
