@@ -14,7 +14,7 @@ public class BlackJackController : MonoBehaviour
 
     private void Start() {
         blackjack_score = 0;
-        blackjack_text_score.text = "Current score: " + blackjack_score;
+        blackjack_text_score.text = "score: " + blackjack_score;
     }
     void Update() {
         if(Input.GetKeyDown(KeyCode.Z) || Input.GetButtonDown("Y"))  {
@@ -30,12 +30,12 @@ public class BlackJackController : MonoBehaviour
             deck.Push(player.Pop());
         }
         blackjack_score = 0;
-        blackjack_text_score.text = "current score: " + blackjack_score;
+        blackjack_text_score.text = "score: " + blackjack_score;
     }
     public void Hit() {
         player.Push(deck.Pop());
         blackjack_score = player.HandValue();
-        blackjack_text_score.text = "current score: " + blackjack_score;
+        blackjack_text_score.text = "score: " + blackjack_score;
         if(player.HandValue() > 21) {
             // TODO: Action to do when player busted 21.
         }       
