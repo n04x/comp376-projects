@@ -6,7 +6,6 @@ public class CardDeck : MonoBehaviour
 {
     List<int> cards;
     public bool isGameDeck;
-
     public bool HasCards {
         get { return cards != null && cards.Count > 0; }
     }
@@ -41,7 +40,6 @@ public class CardDeck : MonoBehaviour
     public int Pop() {
         int temp = cards[0];
         cards.RemoveAt(0);
-
         if(cardRemoved != null) {
             cardRemoved(this, new CardEventArgs(temp));
         }
@@ -70,7 +68,7 @@ public class CardDeck : MonoBehaviour
             // etc. we can see a pattern, it's pos + 1 = values except for 0
             // and pos 9, 10, 11, 12 are 10 (10, J, Q, K respectively)
             int card_rank = card % 13;
-            Debug.Log(card_rank);
+            // Debug.Log(card_rank);
             if(card_rank > 0 && card_rank <= 9) {
                 card_rank += 1;
                 total += card_rank;
@@ -90,7 +88,41 @@ public class CardDeck : MonoBehaviour
         }
         return total;
     }
-
+    public void BurstFiller(int[] kinds, int total) {
+        Debug.Log(total);
+        // Determine card rank to find his type
+        int type = cards[0];
+        if(cardRemoved != null) {
+            cardRemoved(this, new CardEventArgs(type));
+        }
+        int suit = Suits(type);
+        int card_rank = type % 13;
+            if(card_rank > 0 && card_rank <= 9) {
+                card_rank += 1;
+                kinds[suit] += card_rank;
+            } else if(card_rank > 9) {
+                kinds[suit] += 10;
+            } else {
+                if(total <= 21) {
+                    kinds[suit] += 11;
+                } else {
+                    kinds[suit] += 1;
+                }
+            }
+    }
+    int Suits(int card) {
+        int type = -1;
+        if(card <= 12) {
+            type = 0;
+        } else if(card >= 13 && card <= 25) {
+            type = 1;
+        } else if(card >= 26 && card <= 38) {
+            type = 2;
+        } else {
+            type = 3;
+        }
+        return type;
+    }
     // Build a deck.
     public void CreateDeck() {
         cards = new List<int>();
