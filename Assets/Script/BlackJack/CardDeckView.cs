@@ -76,7 +76,5 @@ public class CardDeckView : MonoBehaviour
 
         fetched_cards.Add(card_index, card_object);
 
-        // Temporary Display in Debug.Log to return value.
-        // Debug.Log("Hand value = " + deck.HandValue());
     }
 }
