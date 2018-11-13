@@ -8,17 +8,20 @@ public class BurstFiller : MonoBehaviour
     int meter;
     public Sprite[] fillers;
     public int index;
+    bool blackjack;
     private void Awake() {
+        blackjack = false;
         meter = 0;
         spriteRenderer = GetComponent<SpriteRenderer>();        
     }
 
-    // Might change it based on final consensus on how meter will work
     public void fillMeter(int[] card) {
         meter = card[index];
         float percentage = ( (float) meter / 21) * 100.0f;
         Debug.Log("fillMeter(): " + percentage);
-        if(meter == 0) {
+        if(blackjack) {
+            spriteRenderer.sprite = fillers[9];
+        }else if(meter == 0) { 
             spriteRenderer.sprite = null;
         } else if(percentage > 0.0f && percentage < 10.0f) {
             spriteRenderer.sprite = fillers[0];
@@ -41,5 +44,8 @@ public class BurstFiller : MonoBehaviour
         } else if(percentage >= 90.0f) {
             spriteRenderer.sprite = fillers[9];
         }
+    }
+    public void SetBlackJack(bool b) {
+        blackjack = b;
     }
 }

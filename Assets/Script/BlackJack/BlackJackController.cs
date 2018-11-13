@@ -39,6 +39,7 @@ public class BlackJackController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.X) ||Input.GetButtonDown("B")) {
             Vent();
         }
+        
         BurstDisplay();
         Buffer();
     }
@@ -52,7 +53,6 @@ public class BlackJackController : MonoBehaviour
             deck.Push(player_deck.Pop());
         }
         ResetKind();
-        // Buffer();
         blackjack_score = 0;
         blackjack_text_score.text = "score: " + blackjack_score;
     }
@@ -69,13 +69,26 @@ public class BlackJackController : MonoBehaviour
         }
         ResetKind();
         player_deck.KindsCounter(kind, blackjack_score);
-        // Buffer();
     }
     void Buffer() {
+        BlackJack();
         hearts.fillMeter(kind);
         diamonds.fillMeter(kind);
         clubs.fillMeter(kind);
         spades.fillMeter(kind);
+    }
+
+    void BlackJack() {
+        bool blackjack;
+        if(blackjack_score == 21) {
+            blackjack = true;
+        } else {
+            blackjack = false;
+        }
+        hearts.SetBlackJack(blackjack);
+        diamonds.SetBlackJack(blackjack);
+        clubs.SetBlackJack(blackjack);
+        spades.SetBlackJack(blackjack);
     }
 
     // reset the kind array to push updated value.
