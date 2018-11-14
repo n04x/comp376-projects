@@ -76,12 +76,6 @@ public class RoomFactory
             break;
         }
         newRoom.transform.position = new Vector3((horizontalModifier * (m_roomWidth + 2)) + from.transform.position.x, (verticalModifier * (m_roomHeight + 2)) + from.transform.position.y);
-
-        // update the old rooms exits
-        from.UpdateDoors();
-        from.UpdateWallTexturesForDoors();
-        newRoom.UpdateDoors();
-        newRoom.UpdateWallTexturesForDoors();
         
         return newRoom;
     }
