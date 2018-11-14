@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8323248991763208568}
   - component: {fileID: 8323248991763208566}
   - component: {fileID: 8323248991763208569}
+  - component: {fileID: 7139778862930803619}
   m_Layer: 9
   m_Name: Sword Sprite
   m_TagString: Untagged
@@ -67,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 95562603
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0, g: 0.0963881, b: 1, a: 1}
@@ -106,6 +107,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &7139778862930803619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323248991763208571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8053cc553de244b9bcb6166d17eab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8323248993013776531
 GameObject:
   m_ObjectHideFlags: 0
