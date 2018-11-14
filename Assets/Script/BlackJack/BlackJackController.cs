@@ -17,7 +17,7 @@ public class BlackJackController : MonoBehaviour
     public BurstFiller spades;
     private int blackjack_score;
 
-    private int[] kind = {0, 0, 0, 0};
+    public int[] kind = {0, 0, 0, 0};
     private bool playerHit = false;
 
     // 0 = hearts, 1 = diamonds, 2 = clubs, 3 = spades.
