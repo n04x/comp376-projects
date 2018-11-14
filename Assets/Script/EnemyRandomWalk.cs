@@ -16,7 +16,7 @@ public class EnemyRandomWalk : MonoBehaviour {
     Enemy enemy;
 
     
-Rigidbody2D rb;
+    Rigidbody2D rb;
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();

@@ -20,6 +20,12 @@ public class Enemy : MonoBehaviour {
     //RandomWalk Script
     EnemyRandomWalk EnemyRngWalk;
 
+    //Explosion
+    [SerializeField]
+    GameObject ExplosionPrefab;
+
+    private PlayerControl playerContScript;
+
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
     int enemyHP = 5;
     //Getter and setter to get players position
@@ -37,11 +43,13 @@ public class Enemy : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        //Added
+        GameObject thePlayer = GameObject.Find("Aris");
+        playerContScript = thePlayer.GetComponent<PlayerControl>();
         animator = GetComponent<Animator>();
         firingRate = 1f;
         nextShot = Time.time;
         EnemyRngWalk = GetComponent<EnemyRandomWalk>();
-
         rb2d = GetComponent<Rigidbody2D>();
     }
 	
@@ -53,7 +61,7 @@ public class Enemy : MonoBehaviour {
         if (target != null)
         {
             //direction = Vector2.zero;
-            RunFromTarget();
+            RunToTarget();
         }
         else if (target == null)
         {
@@ -69,29 +77,12 @@ public class Enemy : MonoBehaviour {
     }
 
     //When the player is collided with the enemy it will run the opposite way
-    private void RunFromTarget()
+    private void RunToTarget()
     {
         if (target != null)
         {
             direction = (target.transform.position - transform.position).normalized;
-            
-            rb2d.velocity = -(direction)*speed;
-            //transform.position = Vector2.MoveTowards(transform.position, target.position,-1* speed * Time.deltaTime);
-            if (timer >= 3f)
-            {
-                attacking();
-                timer = 0;
-            }
-        }
-    }
-
-    //Attack at a firing rate
-    private void attacking()
-    {
-        if(Time.time > nextShot)
-        {
-            Instantiate(bullet, transform.position, Quaternion.identity);
-            nextShot = Time.time + firingRate;
+            rb2d.velocity = (direction)*speed;
         }
     }
 
@@ -118,5 +109,12 @@ public class Enemy : MonoBehaviour {
         {
             reduceEnemyHP();
         }
+
+        if(other.gameObject.tag == "Enemy" & gameObject.tag == "Player")
+        {
+            playerContScript.takeDamage(); ;
+            Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+        } 
     }
 }
