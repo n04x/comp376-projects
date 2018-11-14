@@ -7,15 +7,20 @@ public class BlackJackController : MonoBehaviour
 {
     public CardDeck player_deck;
     public CardDeck deck;
+
+
     PlayerControl pc_alice;
-   
+    public GameObject burst_meter;
+    public BurstFiller hearts;
+    public BurstFiller diamonds;
+    public BurstFiller clubs;
+    public BurstFiller spades;
     private int blackjack_score;
-    public int[] kind = {0, 0, 0, 0};
+
+    private int[] kind = {0, 0, 0, 0};
+    private bool playerHit = false;
+
     // 0 = hearts, 1 = diamonds, 2 = clubs, 3 = spades.
-    // private int hearts;
-    // private int diamonds;
-    // private int clubs;
-    // private int spades;
     private bool over = false;
     public Text blackjack_text_score;
     public Text burst_meter_text;
@@ -36,7 +41,9 @@ public class BlackJackController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.X) ||Input.GetButtonDown("B")) {
             Vent();
         }
+        
         BurstDisplay();
+        Buffer();
     }
 
     void Vent() {
@@ -45,9 +52,9 @@ public class BlackJackController : MonoBehaviour
             over = false;
         }
         while(player_deck.HasCards) {
-            player_deck.BurstFiller(kind, blackjack_score);
             deck.Push(player_deck.Pop());
         }
+        ResetKind();
         blackjack_score = 0;
         blackjack_text_score.text = "score: " + blackjack_score;
     }
@@ -57,9 +64,39 @@ public class BlackJackController : MonoBehaviour
             over = false;
             Vent();
         } else {
+            playerHit = true;
             player_deck.Push(deck.Pop());
             blackjack_score = player_deck.HandValue();
             blackjack_text_score.text = "score: " + blackjack_score;    
+        }
+        ResetKind();
+        player_deck.KindsCounter(kind, blackjack_score);
+    }
+    void Buffer() {
+        BlackJack();
+        hearts.fillMeter(kind);
+        diamonds.fillMeter(kind);
+        clubs.fillMeter(kind);
+        spades.fillMeter(kind);
+    }
+
+    void BlackJack() {
+        bool blackjack;
+        if(blackjack_score == 21) {
+            blackjack = true;
+        } else {
+            blackjack = false;
+        }
+        hearts.SetBlackJack(blackjack);
+        diamonds.SetBlackJack(blackjack);
+        clubs.SetBlackJack(blackjack);
+        spades.SetBlackJack(blackjack);
+    }
+
+    // reset the kind array to push updated value.
+    void ResetKind() {
+        for(int i = 0; i < kind.Length; i++) {
+            kind[i] = 0;
         }
     }
     void BurstDisplay() {

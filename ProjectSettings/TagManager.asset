@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - BurstMeter
+  - ClubsFiller
+  - DiamondsFiller
   layers:
   - Default
   - TransparentFX

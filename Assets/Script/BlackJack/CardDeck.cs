@@ -88,15 +88,15 @@ public class CardDeck : MonoBehaviour
         }
         return total;
     }
-    public void BurstFiller(int[] kinds, int total) {
-        Debug.Log(total);
+    public void KindsCounter(int[] kinds, int total) {
         // Determine card rank to find his type
-        int type = cards[0];
-        if(cardRemoved != null) {
-            cardRemoved(this, new CardEventArgs(type));
-        }
-        int suit = Suits(type);
-        int card_rank = type % 13;
+        // int type = cards[0];
+        // if(cardRemoved != null) {
+        //     cardRemoved(this, new CardEventArgs(type));
+        // }
+        foreach(int card in GetCards()) {
+            int suit = Suits(card);
+            int card_rank = card % 13;
             if(card_rank > 0 && card_rank <= 9) {
                 card_rank += 1;
                 kinds[suit] += card_rank;
@@ -109,7 +109,9 @@ public class CardDeck : MonoBehaviour
                     kinds[suit] += 1;
                 }
             }
+        }
     }
+    
     int Suits(int card) {
         int type = -1;
         if(card <= 12) {
