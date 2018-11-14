@@ -37,7 +37,7 @@ public class PlayerControl : MonoBehaviour {
        
     }
 
-    public void takeDamage(){
+     public void takeDamage(){
          HP_UI.damageHeart();
          current_hp--;
     }
