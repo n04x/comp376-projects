@@ -1899,5 +1899,10 @@ PrefabInstance:
       propertyPath: blackJack
       value: 
       objectReference: {fileID: 1653278810}
+    - target: {fileID: 2501808668457213380, guid: 36f89cc6ddd50ab4991b943164447cb9,
+        type: 3}
+      propertyPath: blackJack
+      value: 
+      objectReference: {fileID: 1653278810}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36f89cc6ddd50ab4991b943164447cb9, type: 3}
