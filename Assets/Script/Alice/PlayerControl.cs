@@ -62,7 +62,8 @@ public class PlayerControl : BlackJackAffected {
     }
 
      public void takeDamage(){
-         if(current_hp > 0){
+
+         if(current_hp > 0&& !isInvincible){
          HP_UI.damageHeart();
          current_hp--;}
     }
@@ -108,13 +109,4 @@ public class PlayerControl : BlackJackAffected {
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-{
-    if (other.gameObject.tag =="Enemy")
-    {
-        if(!isInvincible)
-        takeDamage();
-        Destroy(other.gameObject);
-    }
-}
 }

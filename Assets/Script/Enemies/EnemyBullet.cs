@@ -29,12 +29,16 @@ public class EnemyBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.gameObject.name.Equals("Aris"))
         {
             //Cannot manually set the damage taken
             Debug.Log(playerContScript.current_hp);
             playerContScript.takeDamage();
-            Destroy(gameObject);
+
         }
+                    Destroy(gameObject);
+
+
     }
 }

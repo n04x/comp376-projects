@@ -99,7 +99,8 @@ public class EnemyTurret : MonoBehaviour
     {
         if (other.gameObject.layer == 9)//alice tools
         {
-            reduceEnemyHP();
+              AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
+            reduceEnemyHP(aw.damage);
         }
     }
 }

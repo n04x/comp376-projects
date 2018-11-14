@@ -41,7 +41,7 @@ public class ShootingController : BlackJackAffected
         AliceBullet ab = bul.GetComponent<AliceBullet>();
         Vector3 scale = bul.transform.localScale * (current_mode / 21f);
         bul.transform.localScale += scale;
-        ab.damageValue = current_mode;
+        ab.damage = current_mode;
         bul_rb.velocity = transform.up * bullet_speed * Time.deltaTime;
     }
 }

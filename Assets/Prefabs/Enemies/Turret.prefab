@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6875574437301296441}
   - component: {fileID: 6875574437301289671}
   - component: {fileID: 6875574437301289670}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 6875574437318165487}
   - component: {fileID: 6875574437318165482}
   - component: {fileID: 886296976450653812}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Turret
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -180,9 +180,9 @@ GameObject:
   - component: {fileID: 6875574437496340170}
   - component: {fileID: 6875574437496340168}
   - component: {fileID: 6875574437496340171}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 1631473100491802772}
   m_Layer: 10
   m_Name: Range
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

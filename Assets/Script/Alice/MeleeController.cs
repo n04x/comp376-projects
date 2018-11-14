@@ -48,7 +48,7 @@ public class MeleeController : BlackJackAffected
             alice.isSlashing = true;
             wielder_rb.velocity = Vector2.zero;
             sword_instance = Instantiate(sword, transform.position, transform.rotation);
-            AliceSword alice_sword = sword_instance.gameObject.GetComponentInChildren<AliceSword>();
+            AliceWeapon alice_sword = sword_instance.gameObject.GetComponentInChildren<AliceWeapon>();
             alice_sword.damage = current_mode;
             //pushes alice forward
             wielder_rb.velocity = (transform.up* slash_forward_value);

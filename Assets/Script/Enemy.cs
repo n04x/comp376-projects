@@ -102,19 +102,23 @@ public class Enemy : MonoBehaviour {
         Die();
     }
     public void Die(){
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+
         Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.layer ==9)//alice tools
         {
-            reduceEnemyHP();
+            AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
+            reduceEnemyHP(aw.damage);
         }
 
-        if(other.gameObject.tag == "Enemy" & gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
-            playerContScript.takeDamage(); ;
             Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-            Destroy(other.gameObject);
+                        playerContScript.takeDamage();      
+
+            Destroy(transform.parent.gameObject);
         } 
     }
 }
