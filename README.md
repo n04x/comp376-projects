@@ -34,4 +34,11 @@ Y - Draw
   * Draw a new card from the deck    
   
 B - Vent    
-  * Vent the current player deck to get a bonus based on the cards
+  * Vent the current player deck to get a bonus based on the cards    
+  
+### Known Issue    
+`Assets/Script/room/PropEditor.cs(7,27): error CS0246: The type or namespace name` Editor' could not be found. Are you missing an assembly reference?    
+This also `Assets/Script/room/RoomEditor.cs(7,27): error CS0246: The type or namespace name` Editor' could not be found. Are you missing an assembly reference?    
+The solution for this is pretty trivial, create a folder under Assets named Editor, the path should looks like this    
+`Assets/Editor`    
+Then move the Editor Script into this folder in Unity3d `PropEditor.cs, PropEditor.cs.meta, RoomEditor.cs, RoomEditor.cs.meta`
