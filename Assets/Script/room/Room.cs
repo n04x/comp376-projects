@@ -63,7 +63,7 @@ public class Room : MonoBehaviour
   {
     int exitCount = (exits.North ? 1 : 0) + (exits.South ? 1 : 0) + (exits.East ? 1 : 0) + (exits.West ? 1 : 0);
 
-    return 0;
+    return exitCount;
   }
 
   public void Init()
