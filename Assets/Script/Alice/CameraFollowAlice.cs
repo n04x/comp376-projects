@@ -5,7 +5,7 @@ using UnityEngine;
 public class FollowAlice : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField]GameObject target;
+    [SerializeField] public GameObject target;
     [SerializeField] Vector3 offset = new Vector3(0,0,-10);
     void Start()
     {
