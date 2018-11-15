@@ -19,10 +19,15 @@ public class EnemyRandomWalk : MonoBehaviour {
     Rigidbody2D rb;
     // Use this for initialization
     void Start () {
+        init();
+	}
+
+    public void init()
+    {
         animator = GetComponent<Animator>();
          rb = GetComponent<Rigidbody2D>();
         areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY,maxCoordY));
-	}
+    }
 
 	
 	// Update is called once per frame
@@ -43,7 +48,7 @@ public class EnemyRandomWalk : MonoBehaviour {
             direction = (areaTarget.transform.position - transform.position).normalized;
           //  transform.position = Vector2.MoveTowards(transform.position, areaTarget.position, enemySpeed * Time.deltaTime);
             rb.velocity = direction * enemySpeed;
-            if (Vector2.Distance(transform.position, areaTarget.position) < 0.2f)
+            if (Vector2.Distance(transform.position, areaTarget.position) < 1f)
             {
                 if (timer <= 4)
                 {

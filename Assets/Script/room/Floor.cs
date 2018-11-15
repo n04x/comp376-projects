@@ -20,6 +20,7 @@ public class Floor : MonoBehaviour
 
   private RoomMap m_map;
   private RoomFactory m_roomFactory;
+  private GameObject player;
 
   // Start is called before the first frame update
   void Start()
@@ -121,13 +122,35 @@ public class Floor : MonoBehaviour
 
   void ConfigureRooms()
   {
+    Room bestStart = null;
+    FollowAlice camScript = GameObject.Find("Main Camera").GetComponent<FollowAlice>();
+    player = GameObject.Find("Aris");
+
+    camScript.target = player;
     m_map.ForEach((Room r, int x, int y) =>
     {
       int index = Random.Range(0, roomPrefabs.Count);
       r.UpdateWalls();
       r.UpdateDoors();
       r.UpdateWallTexturesForDoors();
-      Instantiate(roomPrefabs[index], r.transform.position, Quaternion.identity);
+      r.layout = Instantiate(roomPrefabs[index], r.transform.position, Quaternion.identity);
+      
+      foreach (EnemyRandomWalk enemy in r.layout.GetComponentsInChildren<EnemyRandomWalk>())
+      {
+        enemy.minCoordX = r.transform.position.x + 1;
+        enemy.minCoordY = r.transform.position.y - 1;
+        enemy.maxCoordX = r.transform.position.x + RoomWidth - 1;
+        enemy.maxCoordY = r.transform.position.y - RoomHeight + 1;
+        enemy.areaTarget = new GameObject("RandomTarget").transform;
+        enemy.init();
+      }
+
+      bestStart = (bestStart == null || r.getExitCount() > bestStart.getExitCount()) ? r : bestStart;
     });
+
+    // TODO? maybe create a start room prefab layout
+    Destroy(bestStart.layout);
+    bestStart.layout = null;
+    player.transform.position = new Vector3(bestStart.transform.position.x + RoomWidth / 2, bestStart.transform.position.y - RoomHeight / 2, bestStart.transform.position.z);
   }
 }

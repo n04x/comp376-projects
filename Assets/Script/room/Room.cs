@@ -17,6 +17,8 @@ public class Room : MonoBehaviour
   public Sprite WallTexture;
   public Sprite CornerTexture;
 
+  public GameObject layout;
+
   #region sprites
   public SpriteRenderer floorSprite;
   // room corners
@@ -56,6 +58,13 @@ public class Room : MonoBehaviour
   #endregion
 
   private bool initialised = false;
+
+  public int getExitCount()
+  {
+    int exitCount = (exits.North ? 1 : 0) + (exits.South ? 1 : 0) + (exits.East ? 1 : 0) + (exits.West ? 1 : 0);
+
+    return exitCount;
+  }
 
   public void Init()
   {
