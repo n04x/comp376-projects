@@ -23,13 +23,27 @@ public class BlackJackController : MonoBehaviour
     // 0 = hearts, 1 = diamonds, 2 = clubs, 3 = spades.
     private bool over = false;
     public Text blackjack_text_score;
-    public Text burst_meter_text;
+    public Text blackjack_timer_seconds;
+    public Text blackjack_timer_decimals;
+    float currentTime = 0.0f;
+    float lastTime = 0.0f;
+    float displayTime = 30.0f;
+    int time_seconds = 30;
+    int time_decimals = 0;
+    public Text hearts_text;
+    public Text diamonds_text;
+    public Text clubs_text;
+    public Text spades_text;
 
     private void Start() {
         GameObject alice_object = GameObject.FindWithTag("Player");
         pc_alice = alice_object.GetComponent<PlayerControl>();
         blackjack_score = 0;
-        blackjack_text_score.text = "score: " + blackjack_score;
+        if (blackjack_score < 10) {
+            blackjack_text_score.text = "0" + blackjack_score;
+        } else {
+            blackjack_text_score.text = blackjack_score.ToString();
+        }
     }
     void Update() {
         if(blackjack_score > 21) {
@@ -40,6 +54,29 @@ public class BlackJackController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.X) ||Input.GetButtonDown("B")) {
             Vent();
+        }
+
+        // === Blackjack Timer
+        lastTime = currentTime;
+        currentTime = Time.time;
+        displayTime -= currentTime - lastTime;
+
+        if (displayTime < 0) {
+            // TIMEOUT CHECK GOES HERE, USE DISPLAYTIME
+            displayTime += 30;
+        }
+
+        time_seconds = Mathf.FloorToInt(displayTime);
+        time_decimals = Mathf.FloorToInt(60 * (displayTime - time_seconds));
+        if (time_seconds < 10) {
+            blackjack_timer_seconds.text = "0" + time_seconds;
+        } else {
+            blackjack_timer_seconds.text = time_seconds.ToString();
+        }
+        if (time_decimals < 10) {
+            blackjack_timer_decimals.text = "0" + time_decimals;
+        } else {
+            blackjack_timer_decimals.text = time_decimals.ToString();
         }
         
         BurstDisplay();
@@ -56,7 +93,12 @@ public class BlackJackController : MonoBehaviour
         }
         ResetKind();
         blackjack_score = 0;
-        blackjack_text_score.text = "score: " + blackjack_score;
+        if (blackjack_score < 10) {
+            blackjack_text_score.text = "0" + blackjack_score;
+        } else {
+            blackjack_text_score.text = blackjack_score.ToString();
+        }
+
     }
     void Hit() {
         if(over) {
@@ -67,7 +109,11 @@ public class BlackJackController : MonoBehaviour
             playerHit = true;
             player_deck.Push(deck.Pop());
             blackjack_score = player_deck.HandValue();
-            blackjack_text_score.text = "score: " + blackjack_score;    
+            if (blackjack_score < 10) {
+                blackjack_text_score.text = "0" + blackjack_score;
+            } else {
+                blackjack_text_score.text = blackjack_score.ToString();
+            }
         }
         ResetKind();
         player_deck.KindsCounter(kind, blackjack_score);
@@ -100,6 +146,28 @@ public class BlackJackController : MonoBehaviour
         }
     }
     void BurstDisplay() {
-        burst_meter_text.text = "hearts: " + kind[0] + "\ndiamonds: " + kind[1] + "\nclubs: " + kind[2] + "\nspades: " + kind[3]; 
+        if (kind[0] < 10) {
+            hearts_text.text = "0" + kind[0];
+        } else {
+            hearts_text.text = kind[0].ToString();
+        }
+
+        if (kind[1] < 10) {
+            diamonds_text.text = "0" + kind[1];
+        } else {
+            diamonds_text.text = kind[1].ToString();
+        }
+
+        if (kind[2] < 10) {
+            clubs_text.text = "0" + kind[2];
+        } else {
+            clubs_text.text = kind[2].ToString();
+        }
+
+        if (kind[3] < 10) {
+            spades_text.text = "0" + kind[3];
+        } else {
+            spades_text.text = kind[3].ToString();
+        }
     }
 }
