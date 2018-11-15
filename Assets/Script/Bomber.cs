@@ -82,7 +82,7 @@ public class Bomber : MonoBehaviour {
         if (target != null)
         {
             direction = (target.transform.position - transform.position).normalized;
-            rb2d.velocity = (direction)*speed;
+            rb2d.velocity = (direction)*speed*Time.deltaTime;
         }
     }
 
@@ -106,7 +106,7 @@ public class Bomber : MonoBehaviour {
 
         Destroy(gameObject);
     }
-    void OnTriggerEnter2D(Collider2D other){
+    void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.layer ==9)//alice tools
         {
             AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
