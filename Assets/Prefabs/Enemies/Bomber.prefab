@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1700934924772018, guid: 7f449077714252c4e98a3352a8788969, type: 3}
       propertyPath: m_Name
-      value: Enemy Variant
+      value: Bomber
       objectReference: {fileID: 0}
     - target: {fileID: 4275702164939244, guid: 7f449077714252c4e98a3352a8788969, type: 3}
       propertyPath: m_LocalScale.x
@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95303313851344718, guid: 7f449077714252c4e98a3352a8788969,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 26a067cadf4dbc4428f622a6170edd20, type: 2}
     m_RemovedComponents:
     - {fileID: 3314438348272784376, guid: 7f449077714252c4e98a3352a8788969, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7f449077714252c4e98a3352a8788969, type: 3}
