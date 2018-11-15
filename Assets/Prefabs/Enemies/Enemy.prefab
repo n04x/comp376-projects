@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 212758589195255952}
   - component: {fileID: 95303313851344718}
   - component: {fileID: 50873655987020398}
-  - component: {fileID: 114974416641887980}
   - component: {fileID: 114744849200586816}
   - component: {fileID: 7640080720718394746}
-  m_Layer: 13
+  - component: {fileID: 3259513033419869397}
+  m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -32,7 +32,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.48, y: -0.26, z: 0}
   m_LocalScale: {x: 9.0248375, y: 9.597549, z: 0.9178798}
-  m_Children: []
+  m_Children:
+  - {fileID: 4526259675423390}
   m_Father: {fileID: 4275702164939244}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -124,24 +125,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &114974416641887980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1237447729945270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68a520316bb8cd744a7e99c74626354a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  bullet: {fileID: 1260667971242838, guid: 61c7a86f42acaff439c53380778cf39c, type: 3}
-  firingRate: 1
-  nextShot: 0
-  timer: 0
-  ExplosionPrefab: {fileID: 0}
 --- !u!114 &114744849200586816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +160,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.0000000037252903}
   serializedVersion: 2
   m_Radius: 0.135
+--- !u!114 &3259513033419869397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237447729945270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c720234ee4ed3948bbc42f2ecce6961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 25
+  bullet: {fileID: 1260667971242838, guid: 61c7a86f42acaff439c53380778cf39c, type: 3}
+  firingRate: 1
+  nextShot: 0
+  timer: 0
 --- !u!1 &1531782239077686
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,12 +202,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531782239077686}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.48, y: -0.26, z: 0}
-  m_LocalScale: {x: 9.0248375, y: 9.597549, z: 0.9178798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4275702164939244}
-  m_RootOrder: 1
+  m_Father: {fileID: 4703716688153456}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &58991241832946570
 CircleCollider2D:
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e83b89b910a7e468cca2012f01588e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 114974416641887980}
+  parent: {fileID: 3259513033419869397}
 --- !u!1 &1700934924772018
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,9 +247,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4275702164939244}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Enemy
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,7 +266,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4703716688153456}
-  - {fileID: 4526259675423390}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
