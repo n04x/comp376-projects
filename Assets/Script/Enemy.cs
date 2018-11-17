@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour {
 
         if (target != null)
         {
-            //direction = Vector2.zero;
             RunFromTarget();
         }
         else if (target == null)
@@ -69,14 +68,14 @@ public class Enemy : MonoBehaviour {
     }
 
     //When the player is collided with the enemy it will run the opposite way
-    private void RunFromTarget()
+    public void RunFromTarget()
     {
         if (target != null)
         {
             direction = (target.transform.position - transform.position).normalized;
-            
-            rb2d.velocity = -(direction)*speed;
+            rb2d.velocity = -((direction) * speed * Time.deltaTime);
             //transform.position = Vector2.MoveTowards(transform.position, target.position,-1* speed * Time.deltaTime);
+
             if (timer >= 3f)
             {
                 attacking();
@@ -109,6 +108,9 @@ public class Enemy : MonoBehaviour {
         enemyHP -= value;
         if(enemyHP <=0)
         Die();
+
+                            Debug.Log(enemyHP);
+
     }
     public void Die(){
         Destroy(gameObject);
@@ -116,7 +118,8 @@ public class Enemy : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.layer ==9)//alice tools
         {
-            reduceEnemyHP();
+            AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
+            reduceEnemyHP(aw.damage);
         }
     }
 }
