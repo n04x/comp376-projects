@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 212758589195255952}
   - component: {fileID: 95303313851344718}
   - component: {fileID: 50873655987020398}
-  - component: {fileID: 114974416641887980}
   - component: {fileID: 114744849200586816}
   - component: {fileID: 7640080720718394746}
+  - component: {fileID: 3259513033419869397}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 95562603
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d4beed10f0cbf1a40a5295aebde6a998, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1237447729945270}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 26a067cadf4dbc4428f622a6170edd20, type: 2}
+  m_Controller: {fileID: 9100000, guid: df87195f7354d3848907db7e06ce5fc7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -125,23 +125,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &114974416641887980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1237447729945270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68a520316bb8cd744a7e99c74626354a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  bullet: {fileID: 1260667971242838, guid: 61c7a86f42acaff439c53380778cf39c, type: 3}
-  firingRate: 1
-  nextShot: 0
-  timer: 0
 --- !u!114 &114744849200586816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0afd82875c2ce1429de5511025aab0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaTarget: {fileID: 0}
+  areaTarget: {fileID: 486571777841908472, guid: 93aaf4b9937edab4c82b131a878f7092,
+    type: 3}
   enemySpeed: 2
   timer: 0
   minCoordX: -7.5
@@ -171,12 +155,29 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.0000000037252903}
   serializedVersion: 2
   m_Radius: 0.135
+--- !u!114 &3259513033419869397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237447729945270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c720234ee4ed3948bbc42f2ecce6961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 25
+  bullet: {fileID: 1260667971242838, guid: 61c7a86f42acaff439c53380778cf39c, type: 3}
+  firingRate: 1
+  nextShot: 0
+  timer: 0
 --- !u!1 &1531782239077686
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e83b89b910a7e468cca2012f01588e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 3259513033419869397}
 --- !u!1 &1700934924772018
 GameObject:
   m_ObjectHideFlags: 0
