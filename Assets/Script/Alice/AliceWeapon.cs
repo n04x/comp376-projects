@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AliceSword : MonoBehaviour
+public class AliceWeapon : MonoBehaviour
 {
     // Start is called before the first frame update
   public int damage = 1;
