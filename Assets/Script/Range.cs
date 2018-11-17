@@ -5,16 +5,13 @@ using UnityEngine;
 //When player is in the range of the enemy 
 public class Range : MonoBehaviour {
 
-   [SerializeField] private Enemy parent; 
+    private Enemy parent; 
 
     void Start()
     {
-       // parent = GetComponentInChildren<Enemy>();
+        parent = GetComponentInParent<Enemy>();
     }
 
-    void Update(){
-        transform.position = parent.transform.position;
-    }
 	private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == "Player")

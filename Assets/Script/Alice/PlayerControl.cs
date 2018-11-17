@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerControl : BlackJackAffected {
+public class PlayerControl : MonoBehaviour {
 	public float movementSpeed = 2f;
 	 Rigidbody2D rb;
 
@@ -12,40 +12,16 @@ public class PlayerControl : BlackJackAffected {
     public bool isSlashing = false;
     public Vector2 lStickDir;
     public Vector2 rStickDir;
-
     // Update is called once per frame
     private void Start()
     {
-        
         rb = GetComponent<Rigidbody2D>();
         current_hp = MAX_HP;
-        suit.heart = true;
     }
     void Update(){
 
-        updateCurrentMode();
-        updateTargetMode();
+
 	}
-    protected override void updateCurrentMode(){
-        if(current_mode != target_mode)
-        {
-            int heartDifference = target_mode - current_mode;
-            if( heartDifference> 0)
-            {//heal up
-
-                int healvalue = (int)(heartDifference*MAX_HP/21f);
-                if(healvalue !=0) {
-                for(int i = 0; i < healvalue ; i++)
-                {
-                    heal();
-                }
-                
-                }
-            }
-            current_mode = target_mode;
-
-        }
-    }
 	void FixedUpdate () {
         rb.angularVelocity = 0;
         if (!isDashing && !isSlashing)
@@ -62,17 +38,8 @@ public class PlayerControl : BlackJackAffected {
     }
 
      public void takeDamage(){
-
-         if(current_hp > 0&& !isInvincible){
          HP_UI.damageHeart();
-         current_hp--;}
-    }
-
-    public void heal(){
-        if(current_hp < MAX_HP){
-         HP_UI.healHeart();
-         current_hp++;
-        }
+         current_hp--;
     }
 	void ProcessMovementInput(){
 
@@ -109,4 +76,13 @@ public class PlayerControl : BlackJackAffected {
 
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+{
+    if (other.gameObject.tag =="Enemy")
+    {
+        if(!isInvincible)
+        takeDamage();
+        Destroy(other.gameObject);
+    }
+}
 }

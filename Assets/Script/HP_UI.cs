@@ -7,7 +7,7 @@ public class HP_UI : MonoBehaviour
     // Start is called before the first frame update
     PlayerControl alice;
     [SerializeField] GameObject heart_object;
-    [SerializeField]static int heartcount;
+    [SerializeField]int heartcount;
     static Stack hearts = new Stack();
     static Stack empty_containers = new Stack();
     [SerializeField] int heart_distance;
@@ -32,27 +32,10 @@ public class HP_UI : MonoBehaviour
         else if(((GameObject)hearts.Peek()).transform.Find("half_heart_left").GetComponent<Image>().isActiveAndEnabled){
             
             ((GameObject)hearts.Peek()).transform.Find("half_heart_left").GetComponent<Image>().enabled =false;
-                    if(hearts.Count >1)
                     empty_containers.Push(hearts.Pop());
         }
  
         
-    }
-
-    public static void healHeart(){
-      
-       if(((GameObject)hearts.Peek()).transform.Find("half_heart_right").GetComponent<Image>().isActiveAndEnabled){
-            hearts.Push(empty_containers.Pop());
-            ((GameObject)hearts.Peek()).transform.Find("half_heart_left").GetComponent<Image>().enabled =true;
-                  
-        }else if(((GameObject)hearts.Peek()).transform.Find("half_heart_left").GetComponent<Image>().isActiveAndEnabled){
-                        ((GameObject)hearts.Peek()).transform.Find("half_heart_right").GetComponent<Image>().enabled =true;
-
-        }else if(hearts.Count == 1 && !((GameObject)hearts.Peek()).transform.Find("half_heart_left").GetComponent<Image>().isActiveAndEnabled ){
-                ((GameObject)hearts.Peek()).transform.Find("half_heart_left").GetComponent<Image>().enabled = true;
-        }
-
- 
     }
 
 

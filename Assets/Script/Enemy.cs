@@ -116,8 +116,7 @@ public class Enemy : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.layer ==9)//alice tools
         {
-            AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
-            reduceEnemyHP(aw.damage);
+            reduceEnemyHP();
         }
     }
 }

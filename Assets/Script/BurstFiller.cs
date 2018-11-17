@@ -21,7 +21,7 @@ public class BurstFiller : MonoBehaviour
     public void fillMeter(int[] card) {
         meter = card[index];
         float percentage = ( (float) meter / 21) * 100.0f;
-        //Debug.Log("fillMeter(): " + percentage);
+        Debug.Log("fillMeter(): " + percentage);
         if(blackjack) {
             fillImage.enabled = true;
             fillImage.sprite = fillers[9];

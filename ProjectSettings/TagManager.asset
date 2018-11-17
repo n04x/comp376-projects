@@ -8,7 +8,6 @@ TagManager:
   - BurstMeter
   - ClubsFiller
   - DiamondsFiller
-  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -22,8 +21,8 @@ TagManager:
   - AliceTools
   - RangeCheck
   - Card
-  - EnemyTools
-  - Enemy
+  - 
+  - 
   - 
   - 
   - 

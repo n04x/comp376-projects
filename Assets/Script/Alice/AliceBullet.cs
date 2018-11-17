@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AliceBullet : AliceWeapon
+public class AliceBullet : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    //public int damage = 1;
+    public int damageValue = 1;
     
 
     // Update is called once per frame
