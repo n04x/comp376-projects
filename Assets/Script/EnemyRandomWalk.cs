@@ -24,6 +24,7 @@ public class EnemyRandomWalk : MonoBehaviour {
 
     public void init()
     {
+        enemy = GetComponent<Enemy>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY,maxCoordY));
@@ -45,7 +46,7 @@ public class EnemyRandomWalk : MonoBehaviour {
     public void FollowRandomDirection()
     {
             direction = (areaTarget.transform.position - transform.position).normalized;
-          //  transform.position = Vector2.MoveTowards(transform.position, areaTarget.position, enemySpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, areaTarget.position, enemySpeed * Time.deltaTime);
             rb.velocity = direction * enemySpeed;
             if (Vector2.Distance(transform.position, areaTarget.position) < 1f)
             {
@@ -67,6 +68,23 @@ public class EnemyRandomWalk : MonoBehaviour {
         if(other.gameObject.tag == "Enemy" && gameObject.tag == "Enemy")
         {
             Debug.Log("Bump");
+            areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY, maxCoordY));
+        }
+
+        if (other.gameObject.tag == "Player" && gameObject.tag == "Enemy")
+        {
+            Debug.Log("Bump");
+            enemy.RunFromTarget();
+            areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY, maxCoordY));
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player" && gameObject.tag == "Enemy")
+        {
+            Debug.Log("Bump");
+            enemy.RunFromTarget();
             areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY, maxCoordY));
         }
     }
