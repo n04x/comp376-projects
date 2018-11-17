@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 50873655987020398}
   - component: {fileID: 114744849200586816}
   - component: {fileID: 7640080720718394746}
-  - component: {fileID: 3259513033419869397}
+  - component: {fileID: 7985125550581289829}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1237447729945270}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: df87195f7354d3848907db7e06ce5fc7, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -161,7 +161,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.0000000037252903}
   serializedVersion: 2
   m_Radius: 0.135
---- !u!114 &3259513033419869397
+--- !u!114 &7985125550581289829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,12 +170,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1237447729945270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c720234ee4ed3948bbc42f2ecce6961, type: 3}
+  m_Script: {fileID: 11500000, guid: 68a520316bb8cd744a7e99c74626354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  bullet: {fileID: 1260667971242838, guid: 61c7a86f42acaff439c53380778cf39c, type: 3}
-  firingRate: 1
+  speed: 0
+  bullet: {fileID: 0}
+  firingRate: 0
   nextShot: 0
   timer: 0
 --- !u!1 &1531782239077686
@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e83b89b910a7e468cca2012f01588e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 3259513033419869397}
 --- !u!1 &1700934924772018
 GameObject:
   m_ObjectHideFlags: 0
