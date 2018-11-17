@@ -25,11 +25,10 @@ public class EnemyRandomWalk : MonoBehaviour {
     public void init()
     {
         animator = GetComponent<Animator>();
-         rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY,maxCoordY));
     }
 
-	
 	// Update is called once per frame
 	void FixedUpdate () {
         animatedDirection(direction);
@@ -60,5 +59,15 @@ public class EnemyRandomWalk : MonoBehaviour {
                     timer = 0;
                 }
             }      
+    }
+
+    //Added this if enemy bumps enemy it will assign a new direction randomly
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Enemy" && gameObject.tag == "Enemy")
+        {
+            Debug.Log("Bump");
+            areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY, maxCoordY));
+        }
     }
 }
