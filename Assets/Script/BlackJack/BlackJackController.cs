@@ -130,6 +130,9 @@ public class BlackJackController : MonoBehaviour
         bool blackjack;
         if(blackjack_score == 21) {
             blackjack = true;
+            for(int i = 0; i < kind.Length; i++) {
+                kind[i] = 21;
+            }
         } else {
             blackjack = false;
         }
