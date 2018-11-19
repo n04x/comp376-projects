@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour {
         if (target != null)
         {
             direction = (target.transform.position - transform.position).normalized;
-            rb2d.velocity = -((direction) * speed * Time.deltaTime);
+            rb2d.velocity = -((direction) * 200 * Time.deltaTime);
             //transform.position = Vector2.MoveTowards(transform.position, target.position,-1* speed * Time.deltaTime);
 
             if (timer >= 3f)
