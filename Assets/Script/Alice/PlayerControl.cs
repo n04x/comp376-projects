@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : BlackJackAffected {
 	public float movementSpeed = 2f;
@@ -12,6 +13,9 @@ public class PlayerControl : BlackJackAffected {
     public bool isSlashing = false;
     public Vector2 lStickDir;
     public Vector2 rStickDir;
+    public Text GameOverText;
+    private float restartDelay = 5f;
+    private float restartTimer;
 
     // Update is called once per frame
     private void Start()
@@ -22,9 +26,12 @@ public class PlayerControl : BlackJackAffected {
         suit.heart = true;
     }
     void Update(){
-
-        updateCurrentMode();
-        updateTargetMode();
+        if(current_hp > 0) {
+            updateCurrentMode();
+            updateTargetMode();
+        } else {
+            GameOver();        
+        }
 	}
     protected override void updateCurrentMode(){
         if(current_mode != target_mode)
@@ -47,13 +54,14 @@ public class PlayerControl : BlackJackAffected {
         }
     }
 	void FixedUpdate () {
-        rb.angularVelocity = 0;
-        if (!isDashing && !isSlashing)
-        {
-            ProcessMovementInput();
+        if(current_hp > 0) {
+            rb.angularVelocity = 0;
+            if (!isDashing && !isSlashing)
+            {
+                ProcessMovementInput();
+            }
+            debuggingInput();
         }
-
-        debuggingInput();
 	}
     void debuggingInput(){
         if(Input.GetKeyDown(KeyCode.Q))
@@ -103,10 +111,13 @@ public class PlayerControl : BlackJackAffected {
                 rb.rotation += 180;
            //movement without rstick
         }
-
-       
-
-
     }
 
+    void GameOver() {
+            GameOverText.text = "GAME OVER!";
+            restartTimer += Time.deltaTime;
+            if(restartTimer >= restartDelay) {
+                Application.LoadLevel(0);
+            }
+    }
 }
