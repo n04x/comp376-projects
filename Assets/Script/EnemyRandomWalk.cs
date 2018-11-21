@@ -67,13 +67,11 @@ public class EnemyRandomWalk : MonoBehaviour {
     {
         if(other.gameObject.tag == "Enemy" && gameObject.tag == "Enemy")
         {
-            Debug.Log("Bump");
             areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY, maxCoordY));
         }
 
         if (other.gameObject.tag == "Player" && gameObject.tag == "Enemy")
         {
-            Debug.Log("Bump");
             enemy.RunFromTarget();
             areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY, maxCoordY));
         }
@@ -83,7 +81,6 @@ public class EnemyRandomWalk : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player" && gameObject.tag == "Enemy")
         {
-            Debug.Log("Bump");
             enemy.RunFromTarget();
             areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY, maxCoordY));
         }
