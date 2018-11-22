@@ -61,10 +61,7 @@ public class BlackJackController : MonoBehaviour
         currentTime = Time.time;
         displayTime -= currentTime - lastTime;
 
-        if (displayTime < 0) {
-            // TIMEOUT CHECK GOES HERE, USE DISPLAYTIME
-            displayTime += 30;
-        }
+        UpdateTimer();
 
         time_seconds = Mathf.FloorToInt(displayTime);
         time_decimals = Mathf.FloorToInt(60 * (displayTime - time_seconds));
@@ -82,7 +79,21 @@ public class BlackJackController : MonoBehaviour
         BurstDisplay();
         Buffer();
     }
+    void UpdateTimer(){
+        if (displayTime < 0) {
+            // TIMEOUT CHECK GOES HERE, USE DISPLAYTIME
+            Vent();
+            if(!over){
+                pc_alice.takeDamage();
+            }
+            ResetTimer();
 
+        }
+    }
+
+    void ResetTimer(){
+        displayTime = 30;
+    }
     void Vent() {
         if(over) {
             pc_alice.takeDamage();
@@ -92,6 +103,8 @@ public class BlackJackController : MonoBehaviour
             deck.Push(player_deck.Pop());
         }
         ResetKind();
+        ResetTimer();
+
         blackjack_score = 0;
         if (blackjack_score < 10) {
             blackjack_text_score.text = "0" + blackjack_score;
@@ -114,6 +127,7 @@ public class BlackJackController : MonoBehaviour
             } else {
                 blackjack_text_score.text = blackjack_score.ToString();
             }
+            ResetTimer();
         }
         ResetKind();
         player_deck.KindsCounter(kind, blackjack_score);
