@@ -44,7 +44,9 @@ public class DashController : BlackJackAffected
     void FixedUpdate()
     {
         Dash();
+        UpdateDashInput();
     }
+
     void updateCooldown()
     {
         cooldown_timer += Time.deltaTime;
@@ -53,26 +55,34 @@ public class DashController : BlackJackAffected
             REMAINING_DASHES++;
             cooldown_timer = 0;
         }
-        DASH_COUNT = 1 + current_mode/7;
+        DASH_COUNT = 1 + current_mode / 7;
 
 
+    }
+
+    void UpdateDashInput()
+    {
+        if (!alice.isDashing&&!alice.isSlashing && Input.GetButtonDown("LB") && Mathf.Abs(rb.velocity.magnitude) >= 0.1f
+                    && REMAINING_DASHES > 0)
+        {
+            alice.isDashing = true;
+            REMAINING_DASHES--;
+
+        }
     }
     void Dash()
     {
         //Dash
-        if (!alice.isSlashing && Input.GetButtonDown("LB") && Mathf.Abs(rb.velocity.magnitude) >= 0.1f
-            && REMAINING_DASHES > 0)
-        {
-            cooldown_timer = 0;
-            REMAINING_DASHES--;
-            alice.isDashing = true;
-            alice.isInvincible = true;
-            rb.AddForce(alice.lStickDir.normalized * dashValue * alice.movementSpeed * Time.deltaTime, ForceMode2D.Impulse);
-
-        }
-
         if (alice.isDashing)
         {
+            alice.isInvincible = true;
+            cooldown_timer = 0;
+
+            rb.AddForce(alice.lStickDir.normalized * dashValue * alice.movementSpeed * Time.deltaTime, ForceMode2D.Impulse);
+
+
+
+
             dash_timer -= Time.deltaTime;
         }
         if (alice.isDashing && dash_timer <= 0f)
