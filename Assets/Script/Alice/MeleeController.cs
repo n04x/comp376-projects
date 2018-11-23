@@ -36,12 +36,26 @@ public class MeleeController : BlackJackAffected
         updateCurrentMode();
         updateTargetMode();
         updateCurrentRotation();
+        UpdateSlashInput();
     }
     void updateCurrentRotation(){
         current_rotation = sword_rotation_min + (sword_rotation_cap - sword_rotation_min) * ((current_mode)/21f);
     }
     void FixedUpdate()
     {
+        
+
+
+        if(sword_instance != null)
+        {
+            Slash();
+        }
+            
+
+
+    }
+ 
+    public void UpdateSlashInput(){
             if (sword_instance == null && Input.GetButtonDown("X") && !alice.isSlashing)
         {
             Debug.Log(wielder_rb);
@@ -55,17 +69,7 @@ public class MeleeController : BlackJackAffected
             wielder_rb.velocity = (transform.up* slash_forward_value);
            // Debug.Log(current_mode +"\n" + current_rotation);
         }
-
-
-        if(sword_instance != null)
-        {
-            Slash();
-        }
-            
-
-
     }
- 
     public void Slash()
     {
         sword_instance.transform.position = this.transform.position;
