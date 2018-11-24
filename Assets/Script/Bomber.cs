@@ -27,7 +27,10 @@ public class Bomber : MonoBehaviour {
     private PlayerControl playerContScript;
 
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
-    int enemyHP = 5;
+      [SerializeField] int enemyHP = 5;
+
+    bool triggered = false;
+    float explosionTimer = 1f;
     //Getter and setter to get players position
     public Transform Target
     {
@@ -67,6 +70,7 @@ public class Bomber : MonoBehaviour {
         {
            EnemyRngWalk.FollowRandomDirection();
         }
+
 	}
 
     //Set animation for all 4 direction using animator and variable
@@ -107,18 +111,41 @@ public class Bomber : MonoBehaviour {
         Destroy(gameObject);
     }
     void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.layer ==9)//alice tools
-        {
-            AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
-            reduceEnemyHP(aw.damage);
-        }
+      
 
         if(other.gameObject.tag == "Player")
         {
-            Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-                        playerContScript.takeDamage();      
+         triggered = true;
+        } 
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+          if(other.gameObject.layer ==9)//alice tools
+        {
+            Debug.Log("Hit");
+            if(other.gameObject.tag == "AliceSword")
+                Die();
+
+            AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
+            reduceEnemyHP(aw.damage);
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D other){
+                explosionCheck();
+
+    }
+    void explosionCheck(){
+        if(triggered)
+        {
+            explosionTimer -= Time.deltaTime;
+            if(explosionTimer <= 0)
+            {
+                 Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+            playerContScript.takeDamage();      
 
             Destroy(transform.parent.gameObject);
-        } 
+            }
+        }
     }
 }
