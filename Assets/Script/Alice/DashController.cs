@@ -18,7 +18,7 @@ public class DashController : BlackJackAffected
 
     float DASH_COOLDOWN = 1f;
     private float cooldown_timer;
-    [SerializeField] int DASH_COUNT = 1;
+    public int DASH_COUNT = 1;
     [SerializeField] int REMAINING_DASHES = 1;
     void Start()
     {
@@ -49,14 +49,24 @@ public class DashController : BlackJackAffected
 
     void updateCooldown()
     {
-        cooldown_timer += Time.deltaTime;
+        if(REMAINING_DASHES < DASH_COUNT)
+        {
+            cooldown_timer += Time.deltaTime;
+        }
         if (cooldown_timer >= DASH_COOLDOWN && REMAINING_DASHES < DASH_COUNT)
         {
             REMAINING_DASHES++;
+            DASH_UI.Refresh(REMAINING_DASHES);
+
             cooldown_timer = 0;
         }
         DASH_COUNT = 1 + current_mode / 7;
+        if(REMAINING_DASHES > DASH_COUNT)
+        {
+            REMAINING_DASHES = DASH_COUNT;
+            DASH_UI.Refresh(REMAINING_DASHES);
 
+        }
 
     }
 
@@ -67,6 +77,8 @@ public class DashController : BlackJackAffected
         {
             alice.isDashing = true;
             REMAINING_DASHES--;
+            
+            DASH_UI.Refresh(REMAINING_DASHES);
 
         }
     }

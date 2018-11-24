@@ -9,6 +9,7 @@ TagManager:
   - ClubsFiller
   - DiamondsFiller
   - EnemyBullet
+  - AliceSword
   layers:
   - Default
   - TransparentFX
