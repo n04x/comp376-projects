@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 
 public class PlayerControl : BlackJackAffected {
+
+
+    [SerializeField] GameObject heart_audio_prefab;
 	public float movementSpeed = 2f;
 	 Rigidbody2D rb;
 
@@ -109,6 +112,7 @@ public class PlayerControl : BlackJackAffected {
     }
     public void heal(){
         if(current_hp < MAX_HP){
+        if(heart_audio_prefab!=null) Instantiate(heart_audio_prefab);
          HP_UI.healHeart();
          current_hp++;
         }

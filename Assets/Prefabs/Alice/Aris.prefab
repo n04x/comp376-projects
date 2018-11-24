@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackJack: {fileID: 0}
+  heart_audio_prefab: {fileID: 1237132707709271875, guid: a238056480d065c47999e7f1120c9048,
+    type: 3}
   movementSpeed: 200
   current_hp: 6
   MAX_HP: 6
@@ -144,6 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackJack: {fileID: 0}
+  dash_audio_prefab: {fileID: 5209247475395421062, guid: 6a406851f28ea4c42b32004e24c2591c,
+    type: 3}
   dashValue: 5
   DASH_DURATION: 0.1
   INVINCIBILITY_DURATION: 0.1

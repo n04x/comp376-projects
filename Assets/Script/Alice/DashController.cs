@@ -6,6 +6,7 @@ public class DashController : BlackJackAffected
 {
     // Start is called before the first frame update
 
+    [SerializeField] GameObject dash_audio_prefab;
     private PlayerControl alice;
     private Rigidbody2D rb;
     public float dashValue = 5f;
@@ -29,7 +30,7 @@ public class DashController : BlackJackAffected
         invincibility_timer = INVINCIBILITY_DURATION;
 
         REMAINING_DASHES = DASH_COUNT;
-        cooldown_timer = DASH_COOLDOWN;
+        cooldown_timer = 0;
 
         suit.diamond = true;
     }
@@ -76,6 +77,8 @@ public class DashController : BlackJackAffected
                     && REMAINING_DASHES > 0)
         {
             alice.isDashing = true;
+            if(dash_audio_prefab!=null) Instantiate(dash_audio_prefab);
+
             REMAINING_DASHES--;
             
             DASH_UI.Refresh(REMAINING_DASHES);
