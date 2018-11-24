@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+    [SerializeField] GameObject hit_audio_prefab;
+
     //EnemyMovement
     private Animator animator;
     public float speed;
@@ -106,10 +108,11 @@ public class Enemy : MonoBehaviour {
 
     public void reduceEnemyHP(int value){
         enemyHP -= value;
+        if(hit_audio_prefab!=null) Instantiate(hit_audio_prefab);
+
         if(enemyHP <=0)
         Die();
 
-                            Debug.Log(enemyHP);
 
     }
     public void Die(){

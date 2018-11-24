@@ -8,12 +8,14 @@ public class HP_UI : MonoBehaviour
     PlayerControl alice;
     [SerializeField] GameObject heart_object;
     [SerializeField]static int heartcount;
-    static Stack hearts = new Stack();
-    static Stack empty_containers = new Stack();
+    static Stack hearts;
+    static Stack empty_containers;
     [SerializeField] int heart_distance;
     void Start()
     {
         alice = FindObjectOfType<PlayerControl>();
+        hearts = new Stack();
+        empty_containers = new Stack();
         heartcount = alice.MAX_HP/2;
 
         for(int i = 0; i < heartcount; i++){

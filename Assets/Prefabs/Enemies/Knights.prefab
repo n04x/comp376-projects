@@ -173,6 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c720234ee4ed3948bbc42f2ecce6961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit_audio_prefab: {fileID: 7243544742902130232, guid: 6636ba1b24345fa49b2cb5bfc218301b,
+    type: 3}
   speed: 25
   bullet: {fileID: 1260667971242838, guid: 61c7a86f42acaff439c53380778cf39c, type: 3}
   firingRate: 1
@@ -249,7 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4275702164939244}
   m_Layer: 13
-  m_Name: Enemy
+  m_Name: Knights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -232,6 +232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a520316bb8cd744a7e99c74626354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit_audio_prefab: {fileID: 7243544742902130232, guid: 6636ba1b24345fa49b2cb5bfc218301b,
+    type: 3}
+  explosion_audio_prefab: {fileID: 4406968543854917810, guid: 0d60637944533c4459e81ab74ed028c5,
+    type: 3}
   speed: 200
   bullet: {fileID: 0}
   firingRate: 0
@@ -239,6 +243,7 @@ MonoBehaviour:
   timer: 0
   ExplosionPrefab: {fileID: 1478926345699456202, guid: 0d483f4ea7bb7314d980b5b60df8b242,
     type: 3}
+  enemyHP: 5
 --- !u!1 &5942262577520549764
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5944208431366495450}
   m_Layer: 13
-  m_Name: Bomber
+  m_Name: Pawns
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Bomber : MonoBehaviour {
 
+    [SerializeField] GameObject hit_audio_prefab;
+    [SerializeField] GameObject explosion_audio_prefab;
+
+
     //EnemyMovement
     private Animator animator;
     public float speed;
@@ -102,12 +106,14 @@ public class Bomber : MonoBehaviour {
 
     public void reduceEnemyHP(int value){
         enemyHP -= value;
+	   if(hit_audio_prefab!=null) Instantiate(hit_audio_prefab);
+
         if(enemyHP <=0)
         Die();
     }
     public void Die(){
         Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-
+        if(explosion_audio_prefab!=null) Instantiate(explosion_audio_prefab);
         Destroy(gameObject);
     }
     void OnCollisionEnter2D(Collision2D other){
@@ -141,10 +147,8 @@ public class Bomber : MonoBehaviour {
             explosionTimer -= Time.deltaTime;
             if(explosionTimer <= 0)
             {
-                 Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             playerContScript.takeDamage(transform.position,30);      
-
-            Destroy(transform.parent.gameObject);
+            Die();
             }
         }
     }

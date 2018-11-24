@@ -25,8 +25,7 @@ public class BlackJackController : MonoBehaviour
     public Text blackjack_text_score;
     public Text blackjack_timer_seconds;
     public Text blackjack_timer_decimals;
-    float currentTime = 0.0f;
-    float lastTime = 0.0f;
+  
     float displayTime = 30.0f;
     int time_seconds = 30;
     int time_decimals = 0;
@@ -57,9 +56,8 @@ public class BlackJackController : MonoBehaviour
         }
 
         // === Blackjack Timer
-        lastTime = currentTime;
-        currentTime = Time.time;
-        displayTime -= currentTime - lastTime;
+       
+        displayTime -= Time.deltaTime;
 
         UpdateTimer();
 

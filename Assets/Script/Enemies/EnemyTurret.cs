@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyTurret : MonoBehaviour
 {
+    [SerializeField] GameObject hit_audio_prefab;
+
     //EnemyMovement
     //private Animator animator;
     public float speed;
@@ -24,7 +26,7 @@ public class EnemyTurret : MonoBehaviour
     PlayerControl playerContScript;
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
     int enemyHP = 4;
-    
+
     //Getter and setter to get players position
     public Transform Target
     {
@@ -45,7 +47,7 @@ public class EnemyTurret : MonoBehaviour
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
         firingRate = 1f;
-        nextShot = Time.time;    
+        nextShot = Time.time;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -79,6 +81,8 @@ public class EnemyTurret : MonoBehaviour
     public void reduceEnemyHP(int value)
     {
         enemyHP -= value;
+        if (hit_audio_prefab != null) Instantiate(hit_audio_prefab);
+
         if (enemyHP <= 0)
             Die();
     }
@@ -89,7 +93,7 @@ public class EnemyTurret : MonoBehaviour
 
     private void shoot()
     {
-        if(Time.time > nextShot)
+        if (Time.time > nextShot)
         {
             nextShot = Time.time + firingRate;
             Instantiate(bullet, transform.position, Quaternion.identity);
@@ -99,7 +103,7 @@ public class EnemyTurret : MonoBehaviour
     {
         if (other.gameObject.layer == 9)//alice tools
         {
-              AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
+            AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
             reduceEnemyHP(aw.damage);
         }
     }
