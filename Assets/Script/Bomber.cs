@@ -142,7 +142,7 @@ public class Bomber : MonoBehaviour {
             if(explosionTimer <= 0)
             {
                  Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-            playerContScript.takeDamage();      
+            playerContScript.takeDamage(transform.position,30);      
 
             Destroy(transform.parent.gameObject);
             }

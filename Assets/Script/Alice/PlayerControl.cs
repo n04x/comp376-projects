@@ -17,6 +17,8 @@ public class PlayerControl : BlackJackAffected {
     private float restartDelay = 5f;
     private float restartTimer;
 
+    bool hurt  = false;
+    float hurtTimer = 0.1f;
     // Update is called once per frame
     private void Start()
     {
@@ -29,10 +31,22 @@ public class PlayerControl : BlackJackAffected {
         if(current_hp > 0) {
             updateCurrentMode();
             updateTargetMode();
+            updateHurt();
         } else {
             GameOver();        
         }
 	}
+
+    void updateHurt(){
+        if(hurt)
+        {
+            hurtTimer -= Time.deltaTime;
+        }
+        if(hurtTimer <=0)
+        {
+            hurt = false;
+        }
+    }
     protected override void updateCurrentMode(){
         if(current_mode != target_mode)
         {
@@ -56,7 +70,7 @@ public class PlayerControl : BlackJackAffected {
 	void FixedUpdate () {
         if(current_hp > 0) {
             rb.angularVelocity = 0;
-            if (!isDashing && !isSlashing)
+            if (!hurt&&!isDashing && !isSlashing)
             {
                 ProcessMovementInput();
             }
@@ -70,12 +84,29 @@ public class PlayerControl : BlackJackAffected {
     }
 
      public void takeDamage(){
+         takeDamage(Vector3.zero, 0);
+         
+    }
+    public void takeDamage(Vector3 dir, float value)
+    {
 
-         if(current_hp > 0&& !isInvincible){
-         HP_UI.damageHeart();
-         current_hp--;}
+        takeDamage( dir,  value,1);
     }
 
+    public void takeDamage(Vector3 dir, float value, int damage){
+        if(current_hp > 0&& !isInvincible){
+         
+         for(int i = 0 ; i < damage; i ++){
+         HP_UI.damageHeart();
+         current_hp--;
+        }
+         hurt = true;
+         hurtTimer = 0.1f;
+         Vector2 kb_dir = new Vector2(transform.position.x - dir.x,transform.position.y - dir.y);
+         rb.velocity = (kb_dir * value);
+
+         }
+    }
     public void heal(){
         if(current_hp < MAX_HP){
          HP_UI.healHeart();
