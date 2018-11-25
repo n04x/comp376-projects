@@ -25,7 +25,7 @@ public class Floor : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    Debug.Log("Start");
+    // Debug.Log("Start");
     m_roomFactory = new RoomFactory(RoomWidth, RoomHeight);
     m_map = new RoomMap(FloorWidth, FloorHeight);
     m_roomFactory.CornerSprite = CornerSprite;
@@ -33,7 +33,7 @@ public class Floor : MonoBehaviour
     m_roomFactory.FloorSprite = FloorSprite;
 
     CreateFloor();
-    Debug.Log("Finish");
+    // Debug.Log("Finish");
   }
 
   void CreateFloor()

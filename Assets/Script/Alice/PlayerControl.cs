@@ -14,7 +14,8 @@ public class PlayerControl : BlackJackAffected {
     public Vector2 lStickDir;
     public Vector2 rStickDir;
     public Text GameOverText;
-    private float restartDelay = 5f;
+    public Image myPanel;
+    private float restartDelay = 5.0f;
     private float restartTimer;
 
     // Update is called once per frame
@@ -82,6 +83,7 @@ public class PlayerControl : BlackJackAffected {
          current_hp++;
         }
     }
+
 	void ProcessMovementInput(){
 
         //Below are left joystick controls
@@ -116,8 +118,15 @@ public class PlayerControl : BlackJackAffected {
     void GameOver() {
             GameOverText.text = "GAME OVER!";
             restartTimer += Time.deltaTime;
+            Color c = myPanel.color;
+            while(c.a <= 255) {
+                c.a += Time.deltaTime / 2;
+            }
             if(restartTimer >= restartDelay) {
                 Application.LoadLevel(0);
             }
+    }
+    public int getHP() {
+        return current_hp;
     }
 }
