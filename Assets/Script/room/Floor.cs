@@ -20,7 +20,10 @@ public class Floor : MonoBehaviour
 
   private RoomMap m_map;
   private RoomFactory m_roomFactory;
-  private GameObject player;
+  private GameObject m_player;
+  private int m_currentRoomX;
+  private int m_currentRoomY;
+  private Room m_currentRoom;
 
   // Start is called before the first frame update
   void Start()
@@ -34,6 +37,37 @@ public class Floor : MonoBehaviour
 
     CreateFloor();
     // Debug.Log("Finish");
+  }
+
+  void Update()
+  {
+    float currentRoomRelativeX = m_player.transform.position.x - m_currentRoom.transform.position.x;
+    float currentRoomRelativeY = m_currentRoom.transform.position.y - m_player.transform.position.y;
+    if (currentRoomRelativeX > RoomWidth + 2)
+    {
+      m_currentRoom.Exit();
+      m_currentRoom = m_map.GetRoom(++m_currentRoomX, m_currentRoomY);
+      m_currentRoom.Enter();
+    }
+    if (currentRoomRelativeX < -2)
+    {
+      m_currentRoom.Exit();
+      m_currentRoom = m_map.GetRoom(--m_currentRoomX, m_currentRoomY);
+      m_currentRoom.Enter();
+    }
+    if (currentRoomRelativeY > RoomHeight + 2)
+    {
+      m_currentRoom.Exit();
+      m_currentRoom = m_map.GetRoom(m_currentRoomX, --m_currentRoomY);
+      m_currentRoom.Enter();
+    }
+    if (currentRoomRelativeY < -2)
+    {
+      m_currentRoom.Exit();
+      m_currentRoom = m_map.GetRoom(m_currentRoomX, ++m_currentRoomY);
+      m_currentRoom.Enter();
+    }
+    Debug.Log("Current X: " + currentRoomRelativeX + " CurrentY: " + currentRoomRelativeY);
   }
 
   void CreateFloor()
@@ -123,10 +157,12 @@ public class Floor : MonoBehaviour
   void ConfigureRooms()
   {
     Room bestStart = null;
+    int bestX = -1;
+    int bestY = -1;
     FollowAlice camScript = GameObject.Find("Main Camera").GetComponent<FollowAlice>();
-    player = GameObject.Find("Aris");
+    m_player = GameObject.Find("Aris");
 
-    camScript.target = player;
+    camScript.target = m_player;
     m_map.ForEach((Room r, int x, int y) =>
     {
       int index = Random.Range(0, roomPrefabs.Count);
@@ -144,13 +180,20 @@ public class Floor : MonoBehaviour
         enemy.areaTarget = new GameObject("RandomTarget").transform;
         enemy.init();
       }
-
-      bestStart = (bestStart == null || r.getExitCount() > bestStart.getExitCount()) ? r : bestStart;
+      if (bestStart == null || r.getExitCount() > bestStart.getExitCount())
+      {
+        bestX = x;
+        bestY = y;
+        bestStart = r;
+      }
     });
 
     // TODO? maybe create a start room prefab layout
     Destroy(bestStart.layout);
     bestStart.layout = null;
-    player.transform.position = new Vector3(bestStart.transform.position.x + RoomWidth / 2, bestStart.transform.position.y - RoomHeight / 2, bestStart.transform.position.z);
+    m_player.transform.position = new Vector3(bestStart.transform.position.x + RoomWidth / 2, bestStart.transform.position.y - RoomHeight / 2, bestStart.transform.position.z);
+    m_currentRoom = bestStart;
+    m_currentRoomX = bestX;
+    m_currentRoomY = bestY;
   }
 }
