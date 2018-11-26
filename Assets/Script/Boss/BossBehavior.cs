@@ -35,7 +35,7 @@ public class BossBehavior : MonoBehaviour
     //Attacks
     bool shootBeam = false;
     [SerializeField]
-    GameObject bullet, beamPrefab;
+    GameObject bullet, beamPrefab, beamAOEPrefab;
 
     //Start is called before the first frame update
     void Start()
@@ -159,6 +159,17 @@ public class BossBehavior : MonoBehaviour
     {
         movement = Vector2.zero;
         //stay and laser beam multiple direction
+
+        movement = Vector2.zero;
+        if (timer > 3.0f)
+        {
+            Instantiate(beamAOEPrefab, transform.position, Quaternion.identity);
+            if (timer > 6)
+            {
+                timer = 0;
+                shootBeam = false;
+            }
+        }
     }
 
     void die()
