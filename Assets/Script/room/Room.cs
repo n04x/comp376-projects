@@ -58,6 +58,8 @@ public class Room : MonoBehaviour
   #endregion
 
   private bool initialised = false;
+  private bool playerInside = false;
+  private bool lockedDown = false;
 
   public int getExitCount()
   {
@@ -120,7 +122,15 @@ public class Room : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (lockedDown)
+    {
+      int enemyCount = layout.GetComponentsInChildren<Enemy>().Length + layout.GetComponentsInChildren<EnemyTurret>().Length + layout.GetComponentsInChildren<Bomber>().Length;
 
+      if (enemyCount == 0)
+      {
+        Open();
+      }
+    }
   }
 
   public void UpdateFloor()
@@ -249,8 +259,8 @@ public class Room : MonoBehaviour
     Vector3 Z = new Vector3(0, 0, 1);
     // room corners
     topLeftCorner.transform.rotation = Quaternion.AngleAxis(0, Z);
-    topRightCorner.transform.rotation = Quaternion.AngleAxis(90, Z);
-    bottomLeftCorner.transform.rotation = Quaternion.AngleAxis(-90, Z);
+    topRightCorner.transform.rotation = Quaternion.AngleAxis(-90, Z);
+    bottomLeftCorner.transform.rotation = Quaternion.AngleAxis(90, Z);
     bottomRightCorner.transform.rotation = Quaternion.AngleAxis(180, Z);
     // walls
     topLeftWall.transform.rotation = Quaternion.AngleAxis(0, Z);
@@ -428,14 +438,14 @@ public class Room : MonoBehaviour
     bottomLeftCorner.drawMode = SpriteDrawMode.Sliced;
     bottomRightCorner.drawMode = SpriteDrawMode.Sliced;
     // walls
-    topLeftWall.drawMode = SpriteDrawMode.Tiled;
-    topRightWall.drawMode = SpriteDrawMode.Tiled;
-    bottomLeftWall.drawMode = SpriteDrawMode.Tiled;
-    bottomRightWall.drawMode = SpriteDrawMode.Tiled;
-    leftTopWall.drawMode = SpriteDrawMode.Tiled;
-    leftBottomWall.drawMode = SpriteDrawMode.Tiled;
-    rightTopWall.drawMode = SpriteDrawMode.Tiled;
-    rightBottomWall.drawMode = SpriteDrawMode.Tiled;
+    topLeftWall.drawMode = SpriteDrawMode.Sliced;
+    topRightWall.drawMode = SpriteDrawMode.Sliced;
+    bottomLeftWall.drawMode = SpriteDrawMode.Sliced;
+    bottomRightWall.drawMode = SpriteDrawMode.Sliced;
+    leftTopWall.drawMode = SpriteDrawMode.Sliced;
+    leftBottomWall.drawMode = SpriteDrawMode.Sliced;
+    rightTopWall.drawMode = SpriteDrawMode.Sliced;
+    rightBottomWall.drawMode = SpriteDrawMode.Sliced;
     // door corners
     // topLeftDoorCorner.drawMode = SpriteDrawMode.Sliced;
     // topRightDoorCorner.drawMode = SpriteDrawMode.Sliced;
@@ -473,5 +483,41 @@ public class Room : MonoBehaviour
     // rightBottomDoorCorner.sortingLayerName = "Wall";
 
     UpdateWallTextures();
+  }
+
+  public void Enter()
+  {
+    playerInside = true;
+    int l1 = layout.GetComponentsInChildren<Enemy>().Length + layout.GetComponentsInChildren<EnemyTurret>().Length + layout.GetComponentsInChildren<Bomber>().Length;
+    if (l1 > 0)
+    {
+      LockDown();
+    }
+  }
+
+  public void Exit()
+  {
+    playerInside = false;
+  }
+
+  void LockDown()
+  {
+    Exits currentExits = exits;
+    exits = new Exits();
+    UpdateWalls();
+    UpdateDoors();
+    UpdateWallTextures();
+    UpdateWallTexturesForDoors();
+    exits = currentExits;
+    lockedDown = true;
+  }
+
+  void Open()
+  {
+    UpdateWalls();
+    UpdateDoors();
+    UpdateWallTextures();
+    UpdateWallTexturesForDoors();
+    lockedDown = false;
   }
 }

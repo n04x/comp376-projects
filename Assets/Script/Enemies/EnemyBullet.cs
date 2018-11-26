@@ -35,6 +35,7 @@ public class EnemyBullet : MonoBehaviour
             Debug.Log(playerContScript.current_hp);
             playerContScript.takeDamage(transform.position, 10);
 
+
         }
                     Destroy(gameObject);
 
