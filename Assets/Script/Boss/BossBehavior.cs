@@ -108,6 +108,7 @@ public class BossBehavior : MonoBehaviour
     public State state = State.IDLE;
 
     //Different state of the boss
+    //
     void idleUpdate()
     {
         //Stop few seconds and aoe for few seconds
