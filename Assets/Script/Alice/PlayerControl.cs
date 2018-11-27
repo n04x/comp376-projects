@@ -117,7 +117,7 @@ public class PlayerControl : BlackJackAffected {
 
     public void takeDamage(Vector3 dir, float value, int damage){
         if(current_hp > 0&& !isInvincible &&!hurtInvincible){
-         
+         ScreenEffects.Shake();
          for(int i = 0 ; i < damage; i ++){
          HP_UI.damageHeart();
          current_hp--;
