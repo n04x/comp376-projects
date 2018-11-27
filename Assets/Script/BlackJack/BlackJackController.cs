@@ -125,10 +125,19 @@ public class BlackJackController : MonoBehaviour
             playerHit = true;
             player_deck.Push(deck.Pop());
             blackjack_score = player_deck.HandValue();
+           
             if (blackjack_score < 10) {
                 blackjack_text_score.text = "0" + blackjack_score;
             } else {
                 blackjack_text_score.text = blackjack_score.ToString();
+            }
+             if(blackjack_score > 21)
+            {
+                 
+                over = true;
+                ResetKind();
+                Vent();
+                
             }
             ResetTimer();
         }
