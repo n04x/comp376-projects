@@ -13,7 +13,7 @@ public class ScreenEffects : MonoBehaviour
 
     Vector3 original_pos;
 
-    [SerializeField]GameObject target;
+    [SerializeField]public GameObject target;
     [SerializeField] Vector3 offset = new Vector3(0,0,-10);
     void Start()
     {

@@ -159,7 +159,7 @@ public class Floor : MonoBehaviour
     Room bestStart = null;
     int bestX = -1;
     int bestY = -1;
-    FollowAlice camScript = GameObject.Find("Main Camera").GetComponent<FollowAlice>();
+    ScreenEffects camScript = GameObject.Find("Main Camera").GetComponent<ScreenEffects>();
     m_player = GameObject.Find("Aris");
 
     camScript.target = m_player;
