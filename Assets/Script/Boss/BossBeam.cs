@@ -17,13 +17,11 @@ public class BossBeam : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-       // target = GameObject.FindObjectOfType<PlayerControl>();
-
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
 
-        //direction = (target.transform.position - transform.position).normalized * bulletSpeed;
-        rb2d.velocity = new Vector2(direction.x, direction.y);
+       // direction = new Vector2(0f, 1f) * bulletSpeed;
+       // rb2d.velocity = new Vector2(direction.x, direction.y);
     }
 
     void OnTriggerEnter2D(Collider2D other)

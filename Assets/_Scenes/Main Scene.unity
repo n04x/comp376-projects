@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1663,21 +1663,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
-    - target: {fileID: 6065811307462376890, guid: d896654aa738a5e428c292cfb2f4dad7,
-        type: 3}
-      propertyPath: state
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6065811307462376890, guid: d896654aa738a5e428c292cfb2f4dad7,
-        type: 3}
-      propertyPath: speed
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6065811307462376890, guid: d896654aa738a5e428c292cfb2f4dad7,
-        type: 3}
-      propertyPath: firingRate
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 9072500182436152628, guid: d896654aa738a5e428c292cfb2f4dad7,
         type: 3}
       propertyPath: m_GravityScale
@@ -1685,15 +1670,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6065811307462376890, guid: d896654aa738a5e428c292cfb2f4dad7,
         type: 3}
-      propertyPath: beamPrefab
+      propertyPath: beamPrefab1
       value: 
       objectReference: {fileID: 1260667971242838, guid: 2adc563688b2bb3438e196dfd4a0a51e,
         type: 3}
     - target: {fileID: 6065811307462376890, guid: d896654aa738a5e428c292cfb2f4dad7,
         type: 3}
-      propertyPath: beamAOEPrefab
+      propertyPath: beamPrefab2
       value: 
-      objectReference: {fileID: 1260667971242838, guid: 977d313eff04d2b49a1d18c2e61194cf,
+      objectReference: {fileID: 1260667971242838, guid: 2adc563688b2bb3438e196dfd4a0a51e,
+        type: 3}
+    - target: {fileID: 6065811307462376890, guid: d896654aa738a5e428c292cfb2f4dad7,
+        type: 3}
+      propertyPath: beamPrefab3
+      value: 
+      objectReference: {fileID: 1260667971242838, guid: 2adc563688b2bb3438e196dfd4a0a51e,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d896654aa738a5e428c292cfb2f4dad7, type: 3}

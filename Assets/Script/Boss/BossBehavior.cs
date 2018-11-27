@@ -15,7 +15,7 @@ public class BossBehavior : MonoBehaviour
     float randomX;
     float randomY;
     Vector2 direction;
-    //Vector2 movement;
+    Vector2 direction1;
 
     //Animation 
     public Animator animator;
@@ -36,12 +36,19 @@ public class BossBehavior : MonoBehaviour
     bool shootBeam = false;
     [SerializeField]
     GameObject bullet, beamPrefab, beamAOEPrefab;
+    Quaternion rotation;
+    float bulletSpeed = 10f;
+
 
     //Start is called before the first frame update
     void Start()
     {
+        beamPrefab.GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        rotation = Quaternion.Euler(0, 180, 0);
+        direction = new Vector2(0f, 1f) * bulletSpeed;
+        direction1 = new Vector2(1f, 0f) * bulletSpeed;
     }
 
     //Update is called once per frame
@@ -121,6 +128,7 @@ public class BossBehavior : MonoBehaviour
         }
         */
         animator.SetBool("isRunning", false);
+        animator.SetBool("isDead", false);
     }
 
     void movingUpdate()
@@ -138,6 +146,7 @@ public class BossBehavior : MonoBehaviour
         }
         
         animator.SetBool("isRunning", true);
+        animator.SetBool("isDead", false);
     }
 
     //beam attack
@@ -146,7 +155,18 @@ public class BossBehavior : MonoBehaviour
         movement = Vector2.zero;
         if (timer > 3.0f)
         {
-            Instantiate(beamPrefab, transform.position, Quaternion.identity);
+            GameObject beamPrefab0 = Instantiate(beamPrefab, transform.position, Quaternion.identity);
+            beamPrefab0.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y);
+            
+            GameObject beamPrefab1 = Instantiate(beamPrefab, transform.position, Quaternion.identity);
+            beamPrefab1.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, -direction.y);
+
+            GameObject beamPrefab2 = Instantiate(beamPrefab, transform.position, Quaternion.identity);
+            beamPrefab2.GetComponent<Rigidbody2D>().velocity = new Vector2(direction1.x, direction1.y);
+
+            GameObject beamPrefab3 = Instantiate(beamPrefab, transform.position, Quaternion.identity);
+            beamPrefab3.GetComponent<Rigidbody2D>().velocity = new Vector2(-direction1.x, direction1.y);
+
             if (timer > 6)
             {
                 timer = 0;
@@ -176,11 +196,10 @@ public class BossBehavior : MonoBehaviour
     {
         movement = Vector2.zero;
         //die when reach 0
-        if(bossHP <= 0)
-        {
-            animator.SetBool("isDead", true);
-            Destroy(gameObject);
-        }
+        
+        animator.SetBool("isDead", true);
+            //Destroy(gameObject);
+        
     }
 
     //Moving phase shooting
