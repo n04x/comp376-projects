@@ -5,6 +5,8 @@ using UnityEngine;
 public class BossBehavior : MonoBehaviour
 {
     public float timer;
+    public float moveTimer;
+    public float moveTimerLeft;
     float bossHP = 25;
 
     //Boss Movement
@@ -38,6 +40,7 @@ public class BossBehavior : MonoBehaviour
     GameObject bullet, beamPrefab, beamAOEPrefab;
     Quaternion rotation;
     float bulletSpeed = 10f;
+    bool actionFinish = false;
 
 
     //Start is called before the first frame update
@@ -54,25 +57,41 @@ public class BossBehavior : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
+        Debug.Log(actionFinish);
         timer += Time.deltaTime;
+        moveTimer += Time.deltaTime;
+        movingUpdate();
 
         switch (state)
         {
-            case State.IDLE:
-                idleUpdate();
-                break;
-            case State.MOVING:
-                movingUpdate();
-                break;
+          //  case State.IDLE:
+            //    idleUpdate();
+              //  break;
+          //  case State.MOVING:
+            //    movingUpdate();
+              //  break;
             case State.ATTACK_1:
                 attack1_Update();
                 break;
             case State.ATTACK_2:
                 attack2_Update();
                 break;
-            case State.DIE:
-                die();
-                break;
+           // case State.DIE:
+             //   die();
+               // break;
+        }
+        
+        /*if(state == State.ATTACK_1)
+        {
+            attack1_Update();
+        }else if(state == State.ATTACK_2)
+        {
+            attack2_Update();
+        }
+        */
+        if(actionFinish == true)
+        {
+            RandomizeState();
         }
     }
 
@@ -110,9 +129,18 @@ public class BossBehavior : MonoBehaviour
         ATTACK_2,
         DIE
     }
+
     //Serialize so can access in inspector
     [SerializeField]
     public State state = State.IDLE;
+
+    void RandomizeState()
+    {
+        state = (State)Random.Range(2, 4);
+        actionFinish = false;
+        Debug.Log(state);
+    }
+    
 
     //Different state of the boss
     //
@@ -120,15 +148,9 @@ public class BossBehavior : MonoBehaviour
     {
         //Stop few seconds and aoe for few seconds
         movement = Vector2.zero;
-        /*if (timer > 3.0f)
-        {
-            Instantiate(beamPrefab, transform.position, Quaternion.identity);
-            if (timer > 6)
-                timer = 0;
-        }
-        */
         animator.SetBool("isRunning", false);
         animator.SetBool("isDead", false);
+        actionFinish = true;
     }
 
     void movingUpdate()
@@ -137,22 +159,24 @@ public class BossBehavior : MonoBehaviour
         //Moving at random place in the room
         randomX = Random.Range(-1f, 1f);
         randomY = Random.Range(-1f, 1f);
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
-        {
-            movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            timeLeft += accelerationTime;
-            shoot();
-        }
-        
+        moveTimerLeft -= Time.deltaTime;
+
         animator.SetBool("isRunning", true);
         animator.SetBool("isDead", false);
+
+        if (moveTimerLeft <= 0)
+        {
+            movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            moveTimerLeft += accelerationTime;
+            shoot();
+            actionFinish = true;
+        }
     }
 
     //beam attack
     void attack1_Update()
     {
-        movement = Vector2.zero;
+       // movement = Vector2.zero;
         if (timer > 3.0f)
         {
             GameObject beamPrefab0 = Instantiate(beamPrefab, transform.position, Quaternion.identity);
@@ -171,16 +195,17 @@ public class BossBehavior : MonoBehaviour
             {
                 timer = 0;
                 shootBeam = false;
+                actionFinish = true;
             }
         }
     }
 
     void attack2_Update()
     {
-        movement = Vector2.zero;
+        //movement = Vector2.zero;
         //stay and laser beam multiple direction
 
-        movement = Vector2.zero;
+        //movement = Vector2.zero;
         if (timer > 3.0f)
         {
             Instantiate(beamAOEPrefab, transform.position, Quaternion.identity);
@@ -188,6 +213,7 @@ public class BossBehavior : MonoBehaviour
             {
                 timer = 0;
                 shootBeam = false;
+                actionFinish = true;
             }
         }
     }
