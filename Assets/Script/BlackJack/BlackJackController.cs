@@ -10,6 +10,7 @@ public class BlackJackController : MonoBehaviour
 
 
     PlayerControl pc_alice;
+    private TrailRenderer pc_trail;
     public GameObject burst_meter;
     public BurstFiller hearts;
     public BurstFiller diamonds;
@@ -37,6 +38,7 @@ public class BlackJackController : MonoBehaviour
     private void Start() {
         GameObject alice_object = GameObject.FindWithTag("Player");
         pc_alice = alice_object.GetComponent<PlayerControl>();
+        pc_trail = alice_object.GetComponent<TrailRenderer>();
         blackjack_score = 0;
         if (blackjack_score < 10) {
             blackjack_text_score.text = "0" + blackjack_score;
@@ -110,6 +112,9 @@ public class BlackJackController : MonoBehaviour
             blackjack_text_score.text = blackjack_score.ToString();
         }
 
+        // Reset trail
+        pc_trail.time = 0.5f;
+
     }
     void Hit() {
         if(over) {
@@ -127,6 +132,11 @@ public class BlackJackController : MonoBehaviour
             }
             ResetTimer();
         }
+
+        // Modify trail length based on proximity to 21. min: 0.5s, max: 1.0s
+        int handVal = player_deck.HandValue();
+        pc_trail.time = 0.5f + ((float)handVal/21)*0.5f;
+
         ResetKind();
         player_deck.KindsCounter(kind, blackjack_score);
     }
