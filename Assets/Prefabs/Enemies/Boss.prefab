@@ -325,6 +325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
+  moveTimer: 0
+  moveTimerLeft: 0
   speed: 150
   animator: {fileID: 8935658779048460308}
   accelerationTime: 1
