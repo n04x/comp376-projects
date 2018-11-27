@@ -9,7 +9,7 @@ public class Bomber : MonoBehaviour {
 
 
     //EnemyMovement
-    private Animator animator;
+    //private Animator animator;
     public float speed;
     private Transform target;
     protected Vector2 direction;
@@ -53,7 +53,7 @@ public class Bomber : MonoBehaviour {
         //Added
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         firingRate = 1f;
         nextShot = Time.time;
         EnemyRngWalk = GetComponent<EnemyRandomWalk>();
@@ -62,7 +62,7 @@ public class Bomber : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        animatedDirection(direction);
+        //animatedDirection(direction);
         timer += Time.deltaTime;
 
         if (target != null)
@@ -80,8 +80,8 @@ public class Bomber : MonoBehaviour {
     //Set animation for all 4 direction using animator and variable
     private void animatedDirection(Vector2 direction)
     {
-        animator.SetFloat("x", direction.x);
-        animator.SetFloat("y", direction.y);
+        //animator.SetFloat("x", direction.x);
+        //animator.SetFloat("y", direction.y);
     }
 
     //When the player is collided with the enemy it will run the opposite way

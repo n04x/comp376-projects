@@ -92,7 +92,7 @@ Transform:
   m_GameObject: {fileID: 5941734287875286912}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.0248375, y: 9.597549, z: 0.9178798}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5944208431366495450}
   m_RootOrder: 1
@@ -134,7 +134,7 @@ SpriteRenderer:
   m_SortingLayerID: 95562603
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9cde3c5ca093b0546b8edd23c6f35f5e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2eaf9d105d0f0c44c9e8b41eae7af53c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -153,7 +153,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5941734287875286912}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 26a067cadf4dbc4428f622a6170edd20, type: 2}
   m_CullingMode: 0
@@ -219,7 +219,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.0020396316, y: 0.0019178716}
   serializedVersion: 2
-  m_Radius: 0.03
+  m_Radius: 0.8
 --- !u!114 &281503153789355142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,17 +232,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a520316bb8cd744a7e99c74626354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hit_audio_prefab: {fileID: 7243544742902130232, guid: 6636ba1b24345fa49b2cb5bfc218301b,
-    type: 3}
-  explosion_audio_prefab: {fileID: 4406968543854917810, guid: 0d60637944533c4459e81ab74ed028c5,
-    type: 3}
+  hit_audio_prefab: {fileID: 7243544742902130232, guid: 6636ba1b24345fa49b2cb5bfc218301b, type: 3}
+  explosion_audio_prefab: {fileID: 4406968543854917810, guid: 0d60637944533c4459e81ab74ed028c5, type: 3}
   speed: 200
   bullet: {fileID: 0}
   firingRate: 0
   nextShot: 0
   timer: 0
-  ExplosionPrefab: {fileID: 1478926345699456202, guid: 0d483f4ea7bb7314d980b5b60df8b242,
-    type: 3}
+  ExplosionPrefab: {fileID: 1478926345699456202, guid: 0d483f4ea7bb7314d980b5b60df8b242, type: 3}
   enemyHP: 5
 --- !u!1 &5942262577520549764
 GameObject:
