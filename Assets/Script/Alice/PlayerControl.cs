@@ -23,6 +23,11 @@ public class PlayerControl : BlackJackAffected {
 
     bool hurt  = false;
     float hurtTimer = 0.1f;
+
+    [SerializeField] float HURT_INVINCIBILITY_DURATION = .25f;
+
+    float hurt_invincibility_timer;
+    private bool hurtInvincible = false;
     // Update is called once per frame
     private void Start()
     {
@@ -30,6 +35,7 @@ public class PlayerControl : BlackJackAffected {
         rb = GetComponent<Rigidbody2D>();
         current_hp = MAX_HP;
         suit.heart = true;
+        hurt_invincibility_timer = HURT_INVINCIBILITY_DURATION;
     }
     void Update(){
         if(current_hp > 0) {
@@ -50,7 +56,19 @@ public class PlayerControl : BlackJackAffected {
         {
             hurt = false;
         }
+
+        if(hurtInvincible)
+        {
+            hurt_invincibility_timer -=Time.deltaTime;
+            if(hurt_invincibility_timer <=0)
+            {
+                 hurt_invincibility_timer =HURT_INVINCIBILITY_DURATION;
+                 hurtInvincible = false;
+             }
+        }
+        
     }
+    
     protected override void updateCurrentMode(){
         if(current_mode != target_mode)
         {
@@ -98,11 +116,12 @@ public class PlayerControl : BlackJackAffected {
     }
 
     public void takeDamage(Vector3 dir, float value, int damage){
-        if(current_hp > 0&& !isInvincible){
-         
+        if(current_hp > 0&& !isInvincible &&!hurtInvincible){
+         ScreenEffects.Shake();
          for(int i = 0 ; i < damage; i ++){
          HP_UI.damageHeart();
          current_hp--;
+         hurtInvincible = true;
         }
          hurt = true;
          hurtTimer = 0.1f;
