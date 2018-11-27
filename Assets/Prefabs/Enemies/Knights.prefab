@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 95562603
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d4beed10f0cbf1a40a5295aebde6a998, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1afaff7df5f49c45865484d8544e5c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -177,9 +177,10 @@ MonoBehaviour:
     type: 3}
   speed: 25
   bullet: {fileID: 1260667971242838, guid: 61c7a86f42acaff439c53380778cf39c, type: 3}
-  firingRate: 1
-  nextShot: 0
-  timer: 0
+  beamPrefab: {fileID: 1260667971242838, guid: 9cbf21239d4d2064b9f25eb057fbc040, type: 3}
+  firingRate: 0.25
+  shotDelay: 3
+  numbShots: 3
 --- !u!1 &1531782239077686
 GameObject:
   m_ObjectHideFlags: 0

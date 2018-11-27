@@ -14,10 +14,13 @@ public class Enemy : MonoBehaviour {
 
     //EnemyAttack
     [SerializeField]
-    GameObject bullet;
+    GameObject bullet, beamPrefab;
+    float timer;
     public float firingRate;
-    public float nextShot;
-    public float timer;
+    public float shotDelay;
+    public int numbShots;
+
+    bool shootBeam = false;
 
     //RandomWalk Script
     EnemyRandomWalk EnemyRngWalk;
@@ -40,10 +43,8 @@ public class Enemy : MonoBehaviour {
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();
-        firingRate = 1f;
-        nextShot = Time.time;
         EnemyRngWalk = GetComponent<EnemyRandomWalk>();
-
+        timer = 0.0f;
         rb2d = GetComponent<Rigidbody2D>();
     }
 	
@@ -55,6 +56,16 @@ public class Enemy : MonoBehaviour {
         if (target != null)
         {
             RunFromTarget();
+
+            if (shootBeam == true)
+                beam();
+
+
+            else
+                shoot();
+
+            //beam();
+            //beamAOE();
         }
         else if (target == null)
         {
@@ -72,28 +83,73 @@ public class Enemy : MonoBehaviour {
     //When the player is collided with the enemy it will run the opposite way
     public void RunFromTarget()
     {
+
         if (target != null)
         {
             direction = (target.transform.position - transform.position).normalized;
             rb2d.velocity = -((direction) * 200 * Time.deltaTime);
             //transform.position = Vector2.MoveTowards(transform.position, target.position,-1* speed * Time.deltaTime);
 
-            if (timer >= 3f)
-            {
-                attacking();
-                timer = 0;
-            }
         }
     }
 
-    //Attack at a firing rate
-    private void attacking()
+    //Base Attack
+    private void shoot()
     {
-        if(Time.time > nextShot)
+        
+        if (numbShots == 0)
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
-            nextShot = Time.time + firingRate;
+            Debug.Log("DELAY: " + timer);
+
+            if (timer > shotDelay)
+            {
+                numbShots = 3;
+                shootBeam = true;
+            }
+                
         }
+        
+
+        else if (timer > firingRate)
+        {
+            //Debug.Log("SHOOT: " + timer);
+            Instantiate(bullet, transform.position, Quaternion.identity);
+            numbShots--;
+            timer = 0;
+        }
+
+    }
+
+    //Beam attack
+    private void beam()
+    {
+
+        if (timer > 3.0f)
+        {
+            Instantiate(beamPrefab, transform.position, Quaternion.identity);
+
+            if (timer > 6)
+            {
+                timer = 0;
+                shootBeam = false;
+            }
+                
+        }
+
+    }
+
+    //Beam attack
+    private void beamAOE()
+    {
+
+        if (timer > 3.0f)
+        {
+            Instantiate(beamPrefab, transform.position, Quaternion.identity);
+
+            if (timer > 6)
+                timer = 0;
+        }
+
     }
 
     public int getEnemyHP()

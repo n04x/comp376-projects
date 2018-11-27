@@ -39,7 +39,7 @@ public class EnemyRandomWalk : MonoBehaviour {
     private void animatedDirection(Vector2 direction)
     {
         direction = (areaTarget.transform.position - transform.position).normalized;
-        animator.SetFloat("x", direction.x);
+        animator.SetFloat("x", direction.x);        animator.SetFloat("x", direction.x);
         animator.SetFloat("y", direction.y);
     }
 
