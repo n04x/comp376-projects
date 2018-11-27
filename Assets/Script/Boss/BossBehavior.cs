@@ -7,7 +7,8 @@ public class BossBehavior : MonoBehaviour
     public float timer;
     public float moveTimer;
     public float moveTimerLeft;
-    float bossHP = 25;
+    float bossCurrentHP = 25;
+    float bossMaxHP = 25;
 
     //Boss Movement
     private Rigidbody2D rb;
@@ -37,10 +38,28 @@ public class BossBehavior : MonoBehaviour
     //Attacks
     bool shootBeam = false;
     [SerializeField]
-    GameObject bullet, beamPrefab, beamAOEPrefab;
+    GameObject bullet, beamPrefab, beamAOEPrefab, beamFollow;
     Quaternion rotation;
     float bulletSpeed = 10f;
     bool actionFinish = false;
+
+    //Getter and Setter to get players position
+    private Transform target;
+    private PlayerControl playerContScript;
+    private Vector2 playerDirection;
+    public float speedToPlayer;
+    bool movingBool = false;
+    public Transform Target
+    {
+        get
+        {
+            return target;
+        }
+        set
+        {
+            target = value;
+        }
+    }
 
 
     //Start is called before the first frame update
@@ -49,6 +68,8 @@ public class BossBehavior : MonoBehaviour
         beamPrefab.GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        GameObject thePlayer = GameObject.Find("Aris");
+        playerContScript = thePlayer.GetComponent<PlayerControl>();
         rotation = Quaternion.Euler(0, 180, 0);
         direction = new Vector2(0f, 1f) * bulletSpeed;
         direction1 = new Vector2(1f, 0f) * bulletSpeed;
@@ -57,41 +78,42 @@ public class BossBehavior : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        Debug.Log(actionFinish);
+        //Debug.Log(actionFinish);
         timer += Time.deltaTime;
         moveTimer += Time.deltaTime;
-        movingUpdate();
+      
+        if (movingBool == true)
+        {
+            movingUpdate();
+            Debug.Log(movingBool);
+        }
 
+        Debug.Log(bossCurrentHP);
         switch (state)
         {
-          //  case State.IDLE:
-            //    idleUpdate();
-              //  break;
-          //  case State.MOVING:
-            //    movingUpdate();
-              //  break;
+            case State.IDLE:
+                idleUpdate();
+                break;
             case State.ATTACK_1:
                 attack1_Update();
                 break;
             case State.ATTACK_2:
                 attack2_Update();
                 break;
+            case State.ATTACK_3:
+                attack3_Update();
+                break;
+            case State.ATTACK_4:
+                attack4_Update();
+                break;
            // case State.DIE:
              //   die();
                // break;
         }
         
-        /*if(state == State.ATTACK_1)
-        {
-            attack1_Update();
-        }else if(state == State.ATTACK_2)
-        {
-            attack2_Update();
-        }
-        */
         if(actionFinish == true)
         {
-            RandomizeState();
+          RandomizeState();
         }
     }
 
@@ -124,9 +146,10 @@ public class BossBehavior : MonoBehaviour
     public enum State
     {
         IDLE,
-        MOVING,
         ATTACK_1,
         ATTACK_2,
+        ATTACK_3,
+        ATTACK_4,
         DIE
     }
 
@@ -136,9 +159,18 @@ public class BossBehavior : MonoBehaviour
 
     void RandomizeState()
     {
-        state = (State)Random.Range(2, 4);
-        actionFinish = false;
-        Debug.Log(state);
+        if(bossCurrentHP <= (bossMaxHP / 2))
+        {
+            state = (State)Random.Range(1, 5);
+            actionFinish = false;
+            Debug.Log(state);
+        }
+        else
+        {
+            state = (State)Random.Range(3, 5);
+            actionFinish = false;
+            Debug.Log(state);
+        }
     }
     
 
@@ -148,6 +180,7 @@ public class BossBehavior : MonoBehaviour
     {
         //Stop few seconds and aoe for few seconds
         movement = Vector2.zero;
+        movingBool = false;
         animator.SetBool("isRunning", false);
         animator.SetBool("isDead", false);
         actionFinish = true;
@@ -157,6 +190,7 @@ public class BossBehavior : MonoBehaviour
     {
         //Move boss and shoot at player at the same time
         //Moving at random place in the room
+        movingBool = true;
         randomX = Random.Range(-1f, 1f);
         randomY = Random.Range(-1f, 1f);
         moveTimerLeft -= Time.deltaTime;
@@ -176,7 +210,10 @@ public class BossBehavior : MonoBehaviour
     //beam attack
     void attack1_Update()
     {
-       // movement = Vector2.zero;
+        //laser beam multiple direction
+        // movement = Vector2.zero;
+        movingBool = true;
+
         if (timer > 3.0f)
         {
             GameObject beamPrefab0 = Instantiate(beamPrefab, transform.position, Quaternion.identity);
@@ -202,10 +239,10 @@ public class BossBehavior : MonoBehaviour
 
     void attack2_Update()
     {
+        //AoE
         //movement = Vector2.zero;
-        //stay and laser beam multiple direction
+        movingBool = true;
 
-        //movement = Vector2.zero;
         if (timer > 3.0f)
         {
             Instantiate(beamAOEPrefab, transform.position, Quaternion.identity);
@@ -218,14 +255,52 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+    void attack3_Update()
+    {
+        movingBool = true;
+        //movement = Vector2.zero;
+        //animator.SetBool("isRunning", false);
+
+        if (timer > 3.0f)
+        {
+            Instantiate(beamFollow, transform.position, Quaternion.identity);
+
+            if (timer > 6)
+            {
+                timer = 0;
+                shootBeam = false;
+                actionFinish = true;
+            }
+        }
+    }
+
+    //Aggro Attack - Rush and triple burst
+    void attack4_Update()
+    {
+        //movingBool = true;
+        if (timer < 6)
+        {
+            if (target != null)
+            {
+                movement = (target.position - transform.position).normalized;
+            }
+            else
+            {
+                movement = Vector2.zero;
+            }
+                rb.velocity = (movement) * speedToPlayer * Time.deltaTime;
+                shoot();
+                actionFinish = true;  
+        }
+    }
+
     void die()
     {
         movement = Vector2.zero;
         //die when reach 0
         
         animator.SetBool("isDead", true);
-            //Destroy(gameObject);
-        
+            //Destroy(gameObject);     
     }
 
     //Moving phase shooting
@@ -249,12 +324,30 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+    public void reduceBossHP()
+    {
+        reduceBossHP(1);
+    }
+
+    public void reduceBossHP(int value)
+    {
+        bossCurrentHP -= value;
+        if (bossCurrentHP <= 0)
+            Destroy(gameObject);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name.Contains("room"))
         {
             Debug.Log("bump");
             movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        }
+
+        if (other.gameObject.layer == 9)//alice tools
+        {
+            AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
+            reduceBossHP(aw.damage);
         }
     }
 

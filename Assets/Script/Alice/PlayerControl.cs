@@ -103,10 +103,5 @@ public class PlayerControl : BlackJackAffected {
                 rb.rotation += 180;
            //movement without rstick
         }
-
-       
-
-
     }
-
 }
