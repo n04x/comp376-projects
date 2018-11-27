@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7228407144559959399}
   - component: {fileID: 9022699396696127512}
-  - component: {fileID: 6968104948904052892}
+  - component: {fileID: 8857566327194355611}
   - component: {fileID: 8221591312305052464}
   - component: {fileID: 7366001516119452554}
   m_Layer: 12
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6017992912657463213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 95562603
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7c280962cc5482e4e9d5fe9a1b731a5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 19d82e4114f21c54085a0f91ddafa079, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &6968104948904052892
-CapsuleCollider2D:
+--- !u!58 &8857566327194355611
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,12 +92,12 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.35, y: 0.34}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 1.28
 --- !u!50 &8221591312305052464
 Rigidbody2D:
   serializedVersion: 4
