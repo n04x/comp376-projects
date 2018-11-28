@@ -19,8 +19,11 @@ public class HP_UI : MonoBehaviour
         heartcount = alice.MAX_HP/2;
 
         for(int i = 0; i < heartcount; i++){
+            Vector3 newPos = transform.position;
             GameObject haato = Instantiate(heart_object, transform.position + new Vector3(heart_distance,0,0)*i,Quaternion.identity);
             haato.transform.parent = this.transform;
+            haato.transform.localScale = new Vector3(1.0f,1.0f,1.0f);
+            haato.transform.position = newPos + new Vector3(1,0,0)*i + new Vector3(0.25f,0,0);
             hearts.Push(haato);
             
         }
