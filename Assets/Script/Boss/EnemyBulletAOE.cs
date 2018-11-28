@@ -34,7 +34,7 @@ public class EnemyBulletAOE : MonoBehaviour
         if (other.gameObject.name.Equals("Aris"))
         {
             //Cannot manually set the damage taken
-            //Debug.Log(playerContScript.current_hp);
+            //Debug.Log(playerContScript.current_hp); 
             playerContScript.takeDamage(transform.position,10);
         }
                     Destroy(gameObject);
