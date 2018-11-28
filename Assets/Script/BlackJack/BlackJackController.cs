@@ -191,13 +191,9 @@ public class BlackJackController : MonoBehaviour
     {
         BlackJack();
         hearts.fillMeter(kind);
-        Debug.Log("hearts: " + kind[0]);
         diamonds.fillMeter(kind);
-        Debug.Log("diamonds: " + kind[1]);
         clubs.fillMeter(kind);
-        Debug.Log("clubs: " + kind[2]);
         spades.fillMeter(kind);
-        Debug.Log("spades: " + kind[3]);
     }
 
     void BlackJack()
