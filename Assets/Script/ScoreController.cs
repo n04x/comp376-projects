@@ -22,4 +22,10 @@ public class ScoreController : MonoBehaviour
         Game_Score += amount;
         Score_Text.text = "SCORE: " + Game_Score;
     }
+
+    public static void Reset(){
+        Game_Score = 0;
+        Score_Text.text = "SCORE: " + Game_Score;
+
+    }
 }

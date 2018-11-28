@@ -186,6 +186,7 @@ public class PlayerControl : BlackJackAffected {
             if(restartTimer >= restartDelay) {
                 Application.LoadLevel(0);
             }
+            ScoreController.Reset();
     }
     public int getHP() {
         return current_hp;
