@@ -13,7 +13,10 @@ public class BomberRange : MonoBehaviour
     }
 
     void Update(){
-        transform.position = parent.transform.position;
+        if (parent != null)
+        {
+            transform.position = parent.transform.position;
+        }
     }
 	private void OnTriggerEnter2D(Collider2D col)
     {
