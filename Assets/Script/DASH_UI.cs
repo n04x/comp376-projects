@@ -14,8 +14,11 @@ public class DASH_UI : MonoBehaviour
         alice_dc = FindObjectOfType<DashController>();
         diamonds = new List<GameObject>();
        for(int i = 0; i < 4; i++){
+            Vector3 newPos = transform.position;
             GameObject dia = Instantiate(diamond, transform.position + new Vector3(0,-40*(4-i) + 100,0),Quaternion.Euler(new Vector3(0,0,45))) as GameObject;
             dia.transform.parent = this.transform;
+            dia.transform.localScale = new Vector3(0.25f,0.25f,1.0f);
+            dia.transform.position = newPos + new Vector3(0.4f,0,0)*i;
             diamonds.Add(dia);
             
         }
