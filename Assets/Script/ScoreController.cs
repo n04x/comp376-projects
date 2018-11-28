@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class ScoreController : MonoBehaviour
+public  class ScoreController : MonoBehaviour
 {
     // Start is called before the first frame update
     public static int Game_Score = 0;
@@ -21,12 +21,12 @@ public class ScoreController : MonoBehaviour
     public static void Increment(int amount){
         Game_Score += amount;
 
-        if(Score_Text.text !=null)Score_Text.text = "SCORE: " + Game_Score;
+        if(Score_Text !=null)Score_Text.text = "SCORE: " + Game_Score;
     }
 
     public static void Reset(){
         Game_Score = 0;
-         if(Score_Text.text !=null)Score_Text.text = "SCORE: " + Game_Score;
+         if(Score_Text !=null)Score_Text.text = "SCORE: " + Game_Score;
 
     }
 }
