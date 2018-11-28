@@ -258,5 +258,7 @@ MonoBehaviour:
   beamAOEPrefab: {fileID: 1260667971242838, guid: 977d313eff04d2b49a1d18c2e61194cf,
     type: 3}
   beamFollow: {fileID: 1260667971242838, guid: faa868d1c3a6afd40ab6d18553763727, type: 3}
+  nextLevelPrefab: {fileID: 2055513885001822548, guid: 1fb959469d92302469fa0846eb356ca0,
+    type: 3}
   speedToPlayer: 50
   state: 0

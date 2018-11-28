@@ -25,7 +25,7 @@ public class EnemyTurret : MonoBehaviour
 
     PlayerControl playerContScript;
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
-    public int enemyHP = 4;
+    public int enemyHP;
 
     //Getter and setter to get players position
     public Transform Target
@@ -46,9 +46,10 @@ public class EnemyTurret : MonoBehaviour
         //Added
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
-        firingRate = 1f;
+        firingRate = 1f - (NextLevel.currentLevel * 0.05f);
         nextShot = Time.time;
         rb2d = GetComponent<Rigidbody2D>();
+        enemyHP = 3 + NextLevel.currentLevel;
     }
 
     // Update is called once per frame

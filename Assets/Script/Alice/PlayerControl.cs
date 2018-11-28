@@ -35,8 +35,11 @@ public class PlayerControl : BlackJackAffected {
     private void Start()
     {
         
+
         rb = GetComponent<Rigidbody2D>();
+        //TODO Find a way to carry over health to next level
         current_hp = MAX_HP;
+        Debug.Log("current_hp: " + current_hp);
         suit.heart = true;
         hurt_invincibility_timer = HURT_INVINCIBILITY_DURATION;
     }
@@ -177,6 +180,7 @@ public class PlayerControl : BlackJackAffected {
 
     void GameOver() {
             GameOverText.text = "GAME OVER!";
+            NextLevel.currentLevel = 1;
             restartTimer += Time.deltaTime;
             Color c = myPanel.color;
             while(c.a <= 255) {

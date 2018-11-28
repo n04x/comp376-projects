@@ -31,7 +31,7 @@ public class Bomber : MonoBehaviour {
     private PlayerControl playerContScript;
 
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
-      [SerializeField] int enemyHP = 5;
+      [SerializeField] int enemyHP;
 
     bool triggered = false;
     float explosionTimer = 1f;
@@ -58,6 +58,7 @@ public class Bomber : MonoBehaviour {
         nextShot = Time.time;
         EnemyRngWalk = GetComponent<EnemyRandomWalk>();
         rb2d = GetComponent<Rigidbody2D>();
+        enemyHP = 4 + NextLevel.currentLevel;
     }
 	
 	// Update is called once per frame
@@ -128,7 +129,7 @@ public class Bomber : MonoBehaviour {
     {
           if(other.gameObject.layer ==9)//alice tools
         {
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
             if(other.gameObject.tag == "AliceSword")
                 Die();
 
@@ -144,7 +145,7 @@ public class Bomber : MonoBehaviour {
     void explosionCheck(){
         if(triggered)
         {
-            explosionTimer -= Time.deltaTime;
+            explosionTimer -= Time.deltaTime * (1.0f + (NextLevel.currentLevel * 0.05f));
             if(explosionTimer <= 0)
             {
             playerContScript.takeDamage(transform.position,30);      

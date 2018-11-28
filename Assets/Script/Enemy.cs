@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour {
     EnemyRandomWalk EnemyRngWalk;
 
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
-    int enemyHP = 5;
+    int enemyHP;
     //Getter and setter to get players position
     public Transform Target
     {
@@ -46,6 +46,8 @@ public class Enemy : MonoBehaviour {
         EnemyRngWalk = GetComponent<EnemyRandomWalk>();
         timer = 0.0f;
         rb2d = GetComponent<Rigidbody2D>();
+        enemyHP = 4 + NextLevel.currentLevel;
+        shotDelay -= NextLevel.currentLevel * 0.05f;
     }
 	
 	// Update is called once per frame
@@ -99,7 +101,7 @@ public class Enemy : MonoBehaviour {
         
         if (numbShots == 0)
         {
-            Debug.Log("DELAY: " + timer);
+            //Debug.Log("DELAY: " + timer);
 
             if (timer > shotDelay)
             {
