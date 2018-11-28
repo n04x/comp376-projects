@@ -21,11 +21,16 @@ public class BlackJackController : MonoBehaviour
     public int[] kind = { 0, 0, 0, 0 };
     private bool playerHit = false;
 
-    //Beep noise
+    //Timer critical
     private float beepTimer = 0.0f;
     AudioSource beepSound;
     public float beepStart = 10.0f; //What second to start beep
+    public float beepCriticalStart = 5.0f; //What second to start beep
     public float beepInterval = 1.0f;   //Time between beeps
+    public float beepCriticalInterval = 0.5f;
+    public float flashLength = 0.05f; // Length of a flash in seconds
+    private Color cyan;
+    private Color magenta;
 
     // 0 = hearts, 1 = diamonds, 2 = clubs, 3 = spades.
     private bool over = false;
@@ -43,6 +48,10 @@ public class BlackJackController : MonoBehaviour
 
     private void Start()
     {
+        // Set colors
+        cyan = new Color (0.0f, 0.8f, 1.0f);
+        magenta = new Color (1.0f, 0.0f, 98.0f/255.0f);
+
         GameObject alice_object = GameObject.FindWithTag("Player");
         pc_alice = alice_object.GetComponent<PlayerControl>();
         pc_trail = alice_object.GetComponent<TrailRenderer>();
@@ -100,19 +109,55 @@ public class BlackJackController : MonoBehaviour
         }
 
 
-        //Beep noise
+        // Beep noise regular (default 10 seconds) and critical. (default 5 seconds)
         if (time_seconds < beepStart)
         {
-            if (beepTimer < 0)
+            // Set timer to magenta
+            blackjack_timer_seconds.color = magenta;
+            blackjack_timer_decimals.color = magenta;
+
+            // Check if timer critical
+            if (time_seconds < beepCriticalStart) 
             {
+
+                if (beepTimer < 0) 
+                {
+                    // Flash every critical interval
+                    StartCoroutine(FlashTimer());
+                    beepSound.Play();
+                    beepTimer = beepCriticalInterval;
+                }
+            } 
+            else if (beepTimer < 0) 
+            {
+                // Flash every interval
+                StartCoroutine(FlashTimer());
                 beepSound.Play();
                 beepTimer = beepInterval;
             }
+
+        } else {
+            // Set timer to cyan
+            blackjack_timer_seconds.color = cyan;
+            blackjack_timer_decimals.color = cyan;
         }
 
         BurstDisplay();
         Buffer();
     }
+
+    IEnumerator FlashTimer () {
+        // hide timer
+        blackjack_timer_seconds.enabled = false;
+        blackjack_timer_decimals.enabled = false;
+
+        yield return new WaitForSeconds(flashLength); // Wait a predetermined amount of time
+
+        // display timer
+        blackjack_timer_seconds.enabled = true;
+        blackjack_timer_decimals.enabled = true;
+    }
+
     void UpdateTimer()
     {
         if (displayTime < 0)
@@ -132,6 +177,7 @@ public class BlackJackController : MonoBehaviour
     {
         displayTime = 30;
     }
+
     void Vent()
     {
         if (over)
