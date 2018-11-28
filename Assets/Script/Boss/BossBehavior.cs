@@ -38,7 +38,7 @@ public class BossBehavior : MonoBehaviour
     //Attacks
     bool shootBeam = false;
     [SerializeField]
-    public GameObject bullet, beamPrefab, beamAOEPrefab, beamFollow;
+    GameObject bullet, beamPrefab, beamAOEPrefab, beamFollow;
     Quaternion rotation;
     float bulletSpeed = 10f;
     bool actionFinish = false;

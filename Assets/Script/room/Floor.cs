@@ -8,7 +8,6 @@ public class Floor : MonoBehaviour
   public Sprite FloorSprite;
   public Sprite WallSprite;
   public Sprite CornerSprite;
-  public GameObject BossLayout;
   public List<GameObject> roomPrefabs;
 
   public float RoomWidth;
@@ -158,7 +157,6 @@ public class Floor : MonoBehaviour
   void ConfigureRooms()
   {
     Room bestStart = null;
-    Room bestBoss = null;
     int bestX = -1;
     int bestY = -1;
     ScreenEffects camScript = GameObject.Find("Main Camera").GetComponent<ScreenEffects>();
@@ -188,17 +186,11 @@ public class Floor : MonoBehaviour
         bestY = y;
         bestStart = r;
       }
-      if ((bestStart != null && bestBoss == null) || r.getExitCount() < bestBoss.getExitCount())
-      {
-        bestBoss = r;
-      }
     });
 
     // TODO? maybe create a start room prefab layout
     Destroy(bestStart.layout);
-    Destroy(bestBoss.layout);
     bestStart.layout = null;
-    bestBoss.layout = Instantiate(BossLayout, bestBoss.transform.position, Quaternion.identity);
     m_player.transform.position = new Vector3(bestStart.transform.position.x + RoomWidth / 2, bestStart.transform.position.y - RoomHeight / 2, bestStart.transform.position.z);
     m_currentRoom = bestStart;
     m_currentRoomX = bestX;
