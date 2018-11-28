@@ -20,12 +20,13 @@ public class ScoreController : MonoBehaviour
     // Update is called once per frame
     public static void Increment(int amount){
         Game_Score += amount;
-        Score_Text.text = "SCORE: " + Game_Score;
+
+        if(Score_Text.text !=null)Score_Text.text = "SCORE: " + Game_Score;
     }
 
     public static void Reset(){
         Game_Score = 0;
-        Score_Text.text = "SCORE: " + Game_Score;
+         if(Score_Text.text !=null)Score_Text.text = "SCORE: " + Game_Score;
 
     }
 }
