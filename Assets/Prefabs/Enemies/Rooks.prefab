@@ -127,8 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91c40e8cfa83c64e89094f9fd5040f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hit_audio_prefab: {fileID: 7243544742902130232, guid: 6636ba1b24345fa49b2cb5bfc218301b,
-    type: 3}
+  hit_audio_prefab: {fileID: 7243544742902130232, guid: 6636ba1b24345fa49b2cb5bfc218301b, type: 3}
   speed: 0
   rotatingSpeed: 360
   bullet: {fileID: 6017992912657463213, guid: cc40ebf3e12c8cf49aaebcaba25d1b00, type: 3}
@@ -136,7 +135,6 @@ MonoBehaviour:
   nextShot: 0
   timer: 0
   playerContScript: {fileID: 0}
-  enemyHP: 10
 --- !u!50 &6875574437318165482
 Rigidbody2D:
   serializedVersion: 4
