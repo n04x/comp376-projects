@@ -28,9 +28,6 @@ public class PlayerControl : BlackJackAffected {
 
     float hurt_invincibility_timer;
     private bool hurtInvincible = false;
-
-    AudioSource hurtSound;
-
     // Update is called once per frame
     private void Start()
     {
@@ -48,15 +45,12 @@ public class PlayerControl : BlackJackAffected {
         } else {
             GameOver();        
         }
-
-        hurtSound = GetComponent<AudioSource>();
-    }
+	}
 
     void updateHurt(){
         if(hurt)
         {
             hurtTimer -= Time.deltaTime;
-            hurtSound.Play();
         }
         if(hurtTimer <=0)
         {
