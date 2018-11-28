@@ -124,7 +124,7 @@ public class Room : MonoBehaviour
   {
     if (lockedDown)
     {
-      int enemyCount = layout.GetComponentsInChildren<Enemy>().Length + layout.GetComponentsInChildren<EnemyTurret>().Length + layout.GetComponentsInChildren<Bomber>().Length;
+      int enemyCount = layout.GetComponentsInChildren<Enemy>().Length + layout.GetComponentsInChildren<EnemyTurret>().Length + layout.GetComponentsInChildren<Bomber>().Length + layout.GetComponentsInChildren<BossBehavior>().Length;
 
       if (enemyCount == 0)
       {
@@ -488,7 +488,7 @@ public class Room : MonoBehaviour
   public void Enter()
   {
     playerInside = true;
-    int l1 = layout.GetComponentsInChildren<Enemy>().Length + layout.GetComponentsInChildren<EnemyTurret>().Length + layout.GetComponentsInChildren<Bomber>().Length;
+    int l1 = layout.GetComponentsInChildren<Enemy>().Length + layout.GetComponentsInChildren<EnemyTurret>().Length + layout.GetComponentsInChildren<Bomber>().Length + layout.GetComponentsInChildren<BossBehavior>().Length;
     if (l1 > 0)
     {
       LockDown();
