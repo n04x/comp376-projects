@@ -13,10 +13,7 @@ public class BossRange : MonoBehaviour
 
     void Update()
     {
-        if (parent != null)
-        {
-            transform.position = parent.transform.position;
-        }
+        transform.position = parent.transform.position;
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
