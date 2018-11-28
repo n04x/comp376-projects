@@ -191,7 +191,10 @@ public class Floor : MonoBehaviour
     // TODO? maybe create a start room prefab layout
     Destroy(bestStart.layout);
     bestStart.layout = null;
+    bestBoss.layout = Instantiate(BossLayout, bestBoss.transform.position, Quaternion.identity);
+    m_player.GetComponent<TrailRenderer>().enabled = false; // Disable trail so it won't be shown crossing the map.
     m_player.transform.position = new Vector3(bestStart.transform.position.x + RoomWidth / 2, bestStart.transform.position.y - RoomHeight / 2, bestStart.transform.position.z);
+    m_player.GetComponent<TrailRenderer>().enabled = true;
     m_currentRoom = bestStart;
     m_currentRoomX = bestX;
     m_currentRoomY = bestY;
