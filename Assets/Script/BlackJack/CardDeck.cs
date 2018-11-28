@@ -94,6 +94,7 @@ public class CardDeck : MonoBehaviour
         // if(cardRemoved != null) {
         //     cardRemoved(this, new CardEventArgs(type));
         // }
+        int aces = 0;
         foreach(int card in GetCards()) {
             int suit = Suits(card);
             int card_rank = card % 13;
@@ -102,8 +103,13 @@ public class CardDeck : MonoBehaviour
                 kinds[suit] += card_rank;
             } else if(card_rank > 9) {
                 kinds[suit] += 10;
-            } else {
-                if(total <= 21) {
+            } else if(card_rank == 0) {
+                aces++;
+            }
+            
+            // TODO: fix that
+            for(int i = 0; i < aces; i++) {
+                if(total + 11 <= 21) {
                     kinds[suit] += 11;
                 } else {
                     kinds[suit] += 1;

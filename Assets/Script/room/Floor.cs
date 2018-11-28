@@ -67,7 +67,7 @@ public class Floor : MonoBehaviour
       m_currentRoom = m_map.GetRoom(m_currentRoomX, ++m_currentRoomY);
       m_currentRoom.Enter();
     }
-    Debug.Log("Current X: " + currentRoomRelativeX + " CurrentY: " + currentRoomRelativeY);
+    // Debug.Log("Current X: " + currentRoomRelativeX + " CurrentY: " + currentRoomRelativeY);
   }
 
   void CreateFloor()
