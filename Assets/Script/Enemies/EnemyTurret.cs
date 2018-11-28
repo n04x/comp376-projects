@@ -25,7 +25,7 @@ public class EnemyTurret : MonoBehaviour
 
     PlayerControl playerContScript;
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
-    int enemyHP = 4;
+    public int enemyHP = 4;
 
     //Getter and setter to get players position
     public Transform Target

@@ -88,11 +88,11 @@ public class BlackJackController : MonoBehaviour
         beepTimer -= Time.deltaTime;
 
         UpdateTimer();
-
+        
         time_seconds = Mathf.FloorToInt(displayTime);
         time_decimals = Mathf.FloorToInt(60 * (displayTime - time_seconds));
         if (time_seconds < 10)
-        {
+        {            
             blackjack_timer_seconds.text = "0" + time_seconds;
         }
         else
@@ -108,7 +108,6 @@ public class BlackJackController : MonoBehaviour
             blackjack_timer_decimals.text = time_decimals.ToString();
         }
 
-        //Beep noise
 
         // Beep noise regular (default 10 seconds) and critical. (default 5 seconds)
         if (time_seconds < beepStart)
