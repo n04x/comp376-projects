@@ -90,10 +90,10 @@ public class BossBehavior : MonoBehaviour
         if (movingBool == true)
         {
             movingUpdate();
-            Debug.Log(movingBool);
+            // Debug.Log(movingBool);
         }
 
-        Debug.Log(bossCurrentHP);
+        // Debug.Log(bossCurrentHP);
         switch (state)
         {
             case State.IDLE:
@@ -168,13 +168,13 @@ public class BossBehavior : MonoBehaviour
         {
             state = (State)Random.Range(1, 5);
             actionFinish = false;
-            Debug.Log(state);
+            // Debug.Log(state);
         }
         else
         {
             state = (State)Random.Range(3, 5);
             actionFinish = false;
-            Debug.Log(state);
+            // Debug.Log(state);
         }
     }
     
@@ -316,7 +316,7 @@ public class BossBehavior : MonoBehaviour
     {
         if (numbShots == 0)
         {
-            Debug.Log("DELAY: " + timer);
+            // Debug.Log("DELAY: " + timer);
             if (timer > shotDelay)
             {
                 numbShots = 3;
