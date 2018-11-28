@@ -239,7 +239,7 @@ MonoBehaviour:
   firingRate: 0
   nextShot: 0
   timer: 0
-  ExplosionPrefab: {fileID: 1478926345699456202, guid: 0d483f4ea7bb7314d980b5b60df8b242, type: 3}
+  ExplosionPrefab: {fileID: 9007898279035443579, guid: b00e00a785704cd4e9737f9013c744c9, type: 3}
   enemyHP: 5
 --- !u!1 &5942262577520549764
 GameObject:
