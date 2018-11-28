@@ -21,6 +21,12 @@ public class BlackJackController : MonoBehaviour
     public int[] kind = { 0, 0, 0, 0 };
     private bool playerHit = false;
 
+    //Beep noise
+    private float beepTimer = 0.0f;
+    AudioSource beepSound;
+    public float beepStart = 10.0f; //What second to start beep
+    public float beepInterval = 1.0f;   //Time between beeps
+
     // 0 = hearts, 1 = diamonds, 2 = clubs, 3 = spades.
     private bool over = false;
     public Text blackjack_text_score;
@@ -49,6 +55,8 @@ public class BlackJackController : MonoBehaviour
         {
             blackjack_text_score.text = blackjack_score.ToString();
         }
+
+        beepSound = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -68,13 +76,14 @@ public class BlackJackController : MonoBehaviour
         // === Blackjack Timer
 
         displayTime -= Time.deltaTime;
+        beepTimer -= Time.deltaTime;
 
         UpdateTimer();
-
+        
         time_seconds = Mathf.FloorToInt(displayTime);
         time_decimals = Mathf.FloorToInt(60 * (displayTime - time_seconds));
         if (time_seconds < 10)
-        {
+        {            
             blackjack_timer_seconds.text = "0" + time_seconds;
         }
         else
@@ -88,6 +97,17 @@ public class BlackJackController : MonoBehaviour
         else
         {
             blackjack_timer_decimals.text = time_decimals.ToString();
+        }
+
+
+        //Beep noise
+        if (time_seconds < beepStart)
+        {
+            if (beepTimer < 0)
+            {
+                beepSound.Play();
+                beepTimer = beepInterval;
+            }
         }
 
         BurstDisplay();
