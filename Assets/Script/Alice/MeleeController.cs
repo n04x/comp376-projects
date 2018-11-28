@@ -56,7 +56,7 @@ public class MeleeController : BlackJackAffected
     }
  
     public void UpdateSlashInput(){
-            if (sword_instance == null && Input.GetButtonDown("X") && !alice.isSlashing)
+            if (sword_instance == null && Input.GetButtonDown("RB") && !alice.isSlashing)
         {
             Debug.Log(wielder_rb);
             alice.isSlashing = true;

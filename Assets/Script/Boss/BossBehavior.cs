@@ -298,7 +298,7 @@ public class BossBehavior : MonoBehaviour
     {
         movement = Vector2.zero;
         //die when reach 0
-        
+
         animator.SetBool("isDead", true);
             //Destroy(gameObject);     
     }
@@ -332,8 +332,11 @@ public class BossBehavior : MonoBehaviour
     public void reduceBossHP(int value)
     {
         bossCurrentHP -= value;
-        if (bossCurrentHP <= 0)
+        if (bossCurrentHP <= 0){
+                ScoreController.Increment(ScoreController.BOSS_SCORE);
+
             Destroy(gameObject);
+            }
     }
 
     void OnTriggerEnter2D(Collider2D other)

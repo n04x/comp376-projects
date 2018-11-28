@@ -101,8 +101,9 @@ public class PlayerControl : BlackJackAffected {
 	}
     void debuggingInput(){
         if(Input.GetKeyDown(KeyCode.Q))
-        takeDamage();
-       
+        {
+            takeDamage();
+        }
     }
 
      public void takeDamage(){

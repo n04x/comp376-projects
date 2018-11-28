@@ -172,6 +172,8 @@ public class Enemy : MonoBehaviour {
 
     }
     public void Die(){
+        ScoreController.Increment(ScoreController.KNIGHT_SCORE);
+
         Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D other){

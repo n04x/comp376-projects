@@ -33,7 +33,8 @@ public class BulletFollow : MonoBehaviour
         {
             //Cannot manually set the damage taken
             //Debug.Log(playerContScript.current_hp);
-            playerContScript.takeDamage();
+            playerContScript.takeDamage(transform.position,15);
+
 
         }
         Destroy(gameObject);

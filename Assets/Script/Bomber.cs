@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomber : MonoBehaviour {
+public class Bomber : MonoBehaviour
+{
 
     [SerializeField] GameObject hit_audio_prefab;
     [SerializeField] GameObject explosion_audio_prefab;
-
 
     //EnemyMovement
     //private Animator animator;
@@ -31,7 +31,7 @@ public class Bomber : MonoBehaviour {
     private PlayerControl playerContScript;
 
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
-      [SerializeField] int enemyHP = 5;
+    [SerializeField] int enemyHP = 5;
 
     bool triggered = false;
     float explosionTimer = 1f;
@@ -49,7 +49,8 @@ public class Bomber : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         //Added
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
@@ -59,9 +60,10 @@ public class Bomber : MonoBehaviour {
         EnemyRngWalk = GetComponent<EnemyRandomWalk>();
         rb2d = GetComponent<Rigidbody2D>();
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         //animatedDirection(direction);
         timer += Time.deltaTime;
 
@@ -72,10 +74,10 @@ public class Bomber : MonoBehaviour {
         }
         else if (target == null)
         {
-           EnemyRngWalk.FollowRandomDirection();
+            EnemyRngWalk.FollowRandomDirection();
         }
 
-	}
+    }
 
     //Set animation for all 4 direction using animator and variable
     private void animatedDirection(Vector2 direction)
@@ -90,7 +92,7 @@ public class Bomber : MonoBehaviour {
         if (target != null)
         {
             direction = (target.transform.position - transform.position).normalized;
-            rb2d.velocity = (direction)*speed*Time.deltaTime;
+            rb2d.velocity = (direction) * speed * Time.deltaTime;
         }
     }
 
@@ -100,55 +102,68 @@ public class Bomber : MonoBehaviour {
     }
     public void reduceEnemyHP()
     {
-        
-        reduceEnemyHP (1);
+
+        reduceEnemyHP(1);
     }
 
-    public void reduceEnemyHP(int value){
+    public void reduceEnemyHP(int value)
+    {
         enemyHP -= value;
-	   if(hit_audio_prefab!=null) Instantiate(hit_audio_prefab);
+        if (hit_audio_prefab != null) Instantiate(hit_audio_prefab);
 
-        if(enemyHP <=0)
-        Die();
+        if (enemyHP <= 0)
+        {
+            ScoreController.Increment(ScoreController.PAWN_SCORE);
+
+            Die();
+        }
     }
-    public void Die(){
+    public void Die()
+    {
         Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-        if(explosion_audio_prefab!=null) Instantiate(explosion_audio_prefab);
+        if (explosion_audio_prefab != null) Instantiate(explosion_audio_prefab);
         Destroy(gameObject);
     }
-    void OnCollisionEnter2D(Collision2D other){
-      
+    void OnCollisionEnter2D(Collision2D other)
+    {
 
-        if(other.gameObject.tag == "Player")
+
+        if (other.gameObject.tag == "Player")
         {
-         triggered = true;
-        } 
+            triggered = true;
+        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-          if(other.gameObject.layer ==9)//alice tools
+        if (other.gameObject.layer == 9)//alice tools
         {
             Debug.Log("Hit");
-            if(other.gameObject.tag == "AliceSword")
+            if (other.gameObject.tag == "AliceSword")
+            {
+                ScoreController.Increment(ScoreController.PAWN_SCORE);
                 Die();
 
+
+            }
             AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
             reduceEnemyHP(aw.damage);
         }
     }
 
-    void OnCollisionStay2D(Collision2D other){
-                explosionCheck();
+    void OnCollisionStay2D(Collision2D other)
+    {
+        explosionCheck();
 
     }
-    void explosionCheck(){
-        if(triggered)
+    void explosionCheck()
+    {
+        if (triggered)
         {
             explosionTimer -= Time.deltaTime;
-            if(explosionTimer <= 0)
+            if (explosionTimer <= 0)
             {
-            playerContScript.takeDamage(transform.position,30);      
-            Die();
+                playerContScript.takeDamage(transform.position, 30);
+                Die();
             }
         }
     }

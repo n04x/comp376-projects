@@ -29,7 +29,7 @@ public class BossBeam : MonoBehaviour
         if (other.gameObject.name.Equals("Aris"))
         {
             //Debug.Log(playerContScript.current_hp);
-            playerContScript.takeDamage();
+            playerContScript.takeDamage(transform.position,20);
         }
 
         Destroy(gameObject);
