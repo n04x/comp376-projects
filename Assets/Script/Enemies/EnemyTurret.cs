@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyTurret : MonoBehaviour
 {
     [SerializeField] GameObject hit_audio_prefab;
-
+    
     //EnemyMovement
     //private Animator animator;
     public float speed;
@@ -26,6 +26,8 @@ public class EnemyTurret : MonoBehaviour
     PlayerControl playerContScript;
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
     public int enemyHP;
+
+    AudioSource shootSound;
 
     //Getter and setter to get players position
     public Transform Target
@@ -55,6 +57,8 @@ public class EnemyTurret : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        shootSound = GetComponent<AudioSource>();
+
         timer += Time.deltaTime;
 
         if (target != null && (playerContScript.current_hp != 0 || playerContScript.current_hp < 0))
@@ -100,6 +104,7 @@ public class EnemyTurret : MonoBehaviour
         {
             nextShot = Time.time + firingRate;
             Instantiate(bullet, transform.position, Quaternion.identity);
+            shootSound.Play();
         }
     }
     void OnTriggerEnter2D(Collider2D other)

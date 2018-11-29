@@ -39,10 +39,11 @@ ParticleSystem:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6363265398466103348}
-  serializedVersion: 5
+  serializedVersion: 6
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
+  cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -4005,6 +4006,7 @@ ParticleSystem:
     inheritParticleColor: 1
     generateLightingData: 0
     splitSubEmitterRibbons: 0
+    attachRibbonsToTransform: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0
@@ -4919,6 +4921,7 @@ GameObject:
   - component: {fileID: 7038849519827948494}
   - component: {fileID: 800723627643552986}
   - component: {fileID: 5217118625933536064}
+  - component: {fileID: 2981377512601958768}
   m_Layer: 13
   m_Name: Boss
   m_TagString: Enemy
@@ -5061,6 +5064,10 @@ MonoBehaviour:
   timer: 0
   moveTimer: 0
   moveTimerLeft: 0
+  shootSound: {fileID: 7243544742902130232, guid: 8ef0efae23894f643931693af25bff4b,
+    type: 3}
+  aoeSound: {fileID: 7243544742902130232, guid: 46166219042edf04aa65c710f1655912,
+    type: 3}
   normalBeat: {fileID: 1212534673699403137}
   criticalBeat: {fileID: 7320296199139972341}
   speed: 150
@@ -5071,12 +5078,109 @@ MonoBehaviour:
   firingRate: 0.25
   bullet: {fileID: 1260667971242838, guid: 61c7a86f42acaff439c53380778cf39c, type: 3}
   beamPrefab: {fileID: 1260667971242838, guid: 2adc563688b2bb3438e196dfd4a0a51e, type: 3}
-  beamAOEPrefab: {fileID: 1260667971242838, guid: 977d313eff04d2b49a1d18c2e61194cf, type: 3}
+  beamAOEPrefab: {fileID: 1260667971242838, guid: 977d313eff04d2b49a1d18c2e61194cf,
+    type: 3}
   beamFollow: {fileID: 1260667971242838, guid: faa868d1c3a6afd40ab6d18553763727, type: 3}
   nextLevelPrefab: {fileID: 2055513885001822548, guid: 1fb959469d92302469fa0846eb356ca0,
     type: 3}
   speedToPlayer: 50
   state: 0
+--- !u!82 &2981377512601958768
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998554760774232854}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8bfae3be9a19e584f84901bfb6eea407, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &9091659050138083487
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,10 +5220,11 @@ ParticleSystem:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9091659050138083487}
-  serializedVersion: 5
+  serializedVersion: 6
   lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
+  cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -9082,6 +9187,7 @@ ParticleSystem:
     inheritParticleColor: 1
     generateLightingData: 0
     splitSubEmitterRibbons: 0
+    attachRibbonsToTransform: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0

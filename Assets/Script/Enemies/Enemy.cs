@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     [SerializeField] GameObject hit_audio_prefab;
+    [SerializeField] AudioSource aoeSound;
+    bool playBeamSound = true;
 
     //EnemyMovement
     private Animator animator;
@@ -25,6 +27,8 @@ public class Enemy : MonoBehaviour {
 
     //RandomWalk Script
     EnemyRandomWalk EnemyRngWalk;
+
+    AudioSource shootSound;
 
     private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
     int enemyHP;
@@ -55,6 +59,7 @@ public class Enemy : MonoBehaviour {
 	void FixedUpdate () {
         animatedDirection(direction);
         timer += Time.deltaTime;
+        shootSound = GetComponent<AudioSource>();
 
         if (target != null)
         {
@@ -120,6 +125,7 @@ public class Enemy : MonoBehaviour {
         {
             //Debug.Log("SHOOT: " + timer);
             Instantiate(bullet, transform.position, Quaternion.identity);
+            shootSound.Play();
             numbShots--;
             timer = 0;
         }
@@ -134,10 +140,18 @@ public class Enemy : MonoBehaviour {
         {
             Instantiate(beamPrefab, transform.position, Quaternion.identity);
 
+            if (playBeamSound == true)
+            {
+                if (aoeSound != null) Instantiate(aoeSound);
+                playBeamSound = false;
+            }
+            
+
             if (timer > 6)
             {
                 timer = 0;
                 shootBeam = false;
+                playBeamSound = true;
             }
                 
         }
@@ -152,8 +166,18 @@ public class Enemy : MonoBehaviour {
         {
             Instantiate(beamPrefab, transform.position, Quaternion.identity);
 
+            if (playBeamSound == true)
+            {
+                if (aoeSound != null) Instantiate(aoeSound);
+                playBeamSound = false;
+            }
+
             if (timer > 6)
+            {
                 timer = 0;
+                playBeamSound = false;
+            }
+                
         }
 
     }
