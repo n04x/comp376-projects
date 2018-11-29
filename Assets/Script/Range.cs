@@ -32,6 +32,6 @@ public class Range : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        parent.Target = null;
+       // parent.Target = null;
     }
 }

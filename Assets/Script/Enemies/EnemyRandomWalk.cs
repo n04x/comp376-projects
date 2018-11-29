@@ -47,10 +47,10 @@ public class EnemyRandomWalk : MonoBehaviour {
     {
             direction = (areaTarget.transform.position - transform.position).normalized;
             transform.position = Vector2.MoveTowards(transform.position, areaTarget.position, enemySpeed * Time.deltaTime);
-            
+            if(enemy != null&&enemy.Target == null){
             float rotationDeg = Mathf.Atan2(transform.position.y - areaTarget.position.y, transform.position.x - areaTarget.position.x) * Mathf.Rad2Deg + 90f;
-            transform.eulerAngles = new Vector3(0f, 0f, Mathf.MoveTowardsAngle(transform.eulerAngles.z, rotationDeg, Time.deltaTime * 400f));
-            
+           transform.eulerAngles = new Vector3(0f, 0f, Mathf.MoveTowardsAngle(transform.eulerAngles.z, rotationDeg, Time.deltaTime * 400f));
+            }
             rb.velocity = direction * enemySpeed;
             if (Vector2.Distance(transform.position, areaTarget.position) < 1f)
             {
