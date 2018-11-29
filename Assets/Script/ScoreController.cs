@@ -21,12 +21,12 @@ public  class ScoreController : MonoBehaviour
     public static void Increment(int amount){
         Game_Score += amount;
 
-        if(Score_Text !=null)Score_Text.text = "SCORE: " + Game_Score;
+        if(Score_Text !=null)Score_Text.text = Game_Score + " SCORE";
     }
 
     public static void Reset(){
         Game_Score = 0;
-         if(Score_Text !=null)Score_Text.text = "SCORE: " + Game_Score;
+         if(Score_Text !=null)Score_Text.text = Game_Score + " SCORE";
 
     }
 }
