@@ -334,7 +334,10 @@ public class BossBehavior : MonoBehaviour
         bossCurrentHP -= value;
         if (bossCurrentHP <= 0)
         {
-            GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
+            //GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
+            NextLevel.currentLevel++;
+            Debug.Log("currentLevel: " + NextLevel.currentLevel);
+            Application.LoadLevel(1);
             Destroy(gameObject);
         }
             
