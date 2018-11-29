@@ -10,6 +10,7 @@ public class Floor : MonoBehaviour
   public Sprite CornerSprite;
   public GameObject BossLayout;
   public List<GameObject> roomPrefabs;
+  public GameObject miniMap;
 
   public float RoomWidth;
   public float RoomHeight;
@@ -25,6 +26,7 @@ public class Floor : MonoBehaviour
   private int m_currentRoomX;
   private int m_currentRoomY;
   private Room m_currentRoom;
+  private MiniMap m_minimap;
 
   // Start is called before the first frame update
   void Start()
@@ -35,6 +37,9 @@ public class Floor : MonoBehaviour
     m_roomFactory.CornerSprite = CornerSprite;
     m_roomFactory.WallSprite = WallSprite;
     m_roomFactory.FloorSprite = FloorSprite;
+
+    m_minimap = miniMap.GetComponent<MiniMap>();
+    m_minimap.Init(FloorWidth, FloorHeight);
 
     CreateFloor();
     // Debug.Log("Finish");
@@ -47,25 +52,33 @@ public class Floor : MonoBehaviour
     if (currentRoomRelativeX > RoomWidth + 2)
     {
       m_currentRoom.Exit();
+      m_minimap.PlayerExit(m_currentRoomX, m_currentRoomY);
       m_currentRoom = m_map.GetRoom(++m_currentRoomX, m_currentRoomY);
+      m_minimap.PlayerEnter(m_currentRoomX, m_currentRoomY);
       m_currentRoom.Enter();
     }
     if (currentRoomRelativeX < -2)
     {
       m_currentRoom.Exit();
+      m_minimap.PlayerExit(m_currentRoomX, m_currentRoomY);
       m_currentRoom = m_map.GetRoom(--m_currentRoomX, m_currentRoomY);
+      m_minimap.PlayerEnter(m_currentRoomX, m_currentRoomY);
       m_currentRoom.Enter();
     }
     if (currentRoomRelativeY > RoomHeight + 2)
     {
       m_currentRoom.Exit();
+      m_minimap.PlayerExit(m_currentRoomX, m_currentRoomY);
       m_currentRoom = m_map.GetRoom(m_currentRoomX, --m_currentRoomY);
+      m_minimap.PlayerEnter(m_currentRoomX, m_currentRoomY);
       m_currentRoom.Enter();
     }
     if (currentRoomRelativeY < -2)
     {
       m_currentRoom.Exit();
+      m_minimap.PlayerExit(m_currentRoomX, m_currentRoomY);
       m_currentRoom = m_map.GetRoom(m_currentRoomX, ++m_currentRoomY);
+      m_minimap.PlayerEnter(m_currentRoomX, m_currentRoomY);
       m_currentRoom.Enter();
     }
     // Debug.Log("Current X: " + currentRoomRelativeX + " CurrentY: " + currentRoomRelativeY);
@@ -192,6 +205,7 @@ public class Floor : MonoBehaviour
       {
         bestBoss = r;
       }
+      m_minimap.CreateRoom(x, y);
     });
 
     // TODO? maybe create a start room prefab layout
@@ -205,5 +219,7 @@ public class Floor : MonoBehaviour
     m_currentRoom = bestStart;
     m_currentRoomX = bestX;
     m_currentRoomY = bestY;
+
+    m_minimap.PlayerEnter(bestX, bestY);
   }
 }
