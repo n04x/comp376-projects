@@ -286,7 +286,7 @@ public class BlackJackController : MonoBehaviour
 
             if (playBJSound = true)
             {
-                if (bjSound != null) Instantiate(bjSound);
+                //if (bjSound != null) Instantiate(bjSound);
                 playBJSound = false;
 
             }
