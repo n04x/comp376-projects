@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 95562603
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b1afaff7df5f49c45865484d8544e5c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5c24a779b5f99f147a870cf8eb3883be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,7 +93,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237447729945270}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: df87195f7354d3848907db7e06ce5fc7, type: 2}
   m_CullingMode: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
   firingRate: 0.25
   shotDelay: 3
   numbShots: 3
+  rotatingSpeed: 400
 --- !u!1 &1531782239077686
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +229,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.36
+  m_Radius: 0.42
 --- !u!114 &114499192920183296
 MonoBehaviour:
   m_ObjectHideFlags: 0

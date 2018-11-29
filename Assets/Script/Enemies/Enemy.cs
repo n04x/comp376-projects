@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour {
     public float firingRate;
     public float shotDelay;
     public int numbShots;
+    public float rotatingSpeed;
 
     bool shootBeam = false;
 
@@ -90,7 +91,10 @@ public class Enemy : MonoBehaviour {
         {
             direction = (target.transform.position - transform.position).normalized;
             rb2d.velocity = -((direction) * 200 * Time.deltaTime);
-            //transform.position = Vector2.MoveTowards(transform.position, target.position,-1* speed * Time.deltaTime);
+            //If there is a target it will rotate towards it + 90deg makes it face the player 
+            float rotationDeg = Mathf.Atan2(transform.position.y - target.transform.position.y, transform.position.x - target.transform.position.x) * Mathf.Rad2Deg + 90f;
+            transform.eulerAngles = new Vector3(0f, 0f, Mathf.MoveTowardsAngle(transform.eulerAngles.z, rotationDeg, Time.deltaTime * rotatingSpeed));
+            shoot();
 
         }
     }
@@ -174,6 +178,8 @@ public class Enemy : MonoBehaviour {
 
     }
     public void Die(){
+        ScoreController.Increment(ScoreController.KNIGHT_SCORE);
+
         Destroy(gameObject);
     }
     void OnTriggerEnter2D(Collider2D other){

@@ -10,6 +10,10 @@ public class BossBehavior : MonoBehaviour
     float bossCurrentHP;
     float bossMaxHP = 25 + NextLevel.currentLevel;
 
+    // Visuals
+    public ParticleSystem normalBeat;
+    public ParticleSystem criticalBeat;
+
     //Boss Movement
     private Rigidbody2D rb;
     public float speed;
@@ -78,6 +82,7 @@ public class BossBehavior : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
+
         //Debug.Log(actionFinish);
         timer += Time.deltaTime;
         moveTimer += Time.deltaTime;
@@ -296,9 +301,12 @@ public class BossBehavior : MonoBehaviour
 
     void die()
     {
+        // Stop heartbeat
+        criticalBeat.Stop();  
+
         movement = Vector2.zero;
         //die when reach 0
-        
+
         animator.SetBool("isDead", true);
         //Destroy(gameObject);
     }
@@ -308,7 +316,7 @@ public class BossBehavior : MonoBehaviour
     {
         if (numbShots == 0)
         {
-            //Debug.Log("DELAY: " + timer);
+            // Debug.Log("DELAY: " + timer);
             if (timer > shotDelay)
             {
                 numbShots = 3;
@@ -335,9 +343,15 @@ public class BossBehavior : MonoBehaviour
         if (bossCurrentHP <= 0)
         {
             GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);   
+            ScoreController.Increment(ScoreController.BOSS_SCORE);
             Destroy(gameObject);
         }
-            
+        else if (bossCurrentHP <= bossMaxHP/2) 
+        {
+            normalBeat.Stop();
+            criticalBeat.Play();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

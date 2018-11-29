@@ -89,6 +89,8 @@ public class EnemyTurret : MonoBehaviour
     }
     public void Die()
     {
+        ScoreController.Increment(ScoreController.ROOK_SCORE);
+
         Destroy(gameObject);
     }
 
