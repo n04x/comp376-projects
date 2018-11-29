@@ -346,9 +346,9 @@ public class BossBehavior : MonoBehaviour
             Destroy(gameObject);   
             ScoreController.Increment(ScoreController.BOSS_SCORE);
             //GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
-            NextLevel.currentLevel++;
-            Debug.Log("currentLevel: " + NextLevel.currentLevel);
-            Application.LoadLevel(1);
+           // NextLevel.currentLevel++;
+          //  Debug.Log("currentLevel: " + NextLevel.currentLevel);
+            //Application.LoadLevel(1);
             Destroy(gameObject);
         }
         else if (bossCurrentHP <= bossMaxHP/2) 

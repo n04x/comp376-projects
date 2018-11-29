@@ -14,7 +14,10 @@ public  class ScoreController : MonoBehaviour
     public static int BOSS_SCORE = 500;
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         Score_Text = GetComponent<Text>();
+        if(Score_Text !=null)Score_Text.text = Game_Score + " SCORE";
+
     }
 
     // Update is called once per frame
