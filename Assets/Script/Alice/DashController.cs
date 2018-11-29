@@ -21,6 +21,10 @@ public class DashController : BlackJackAffected
     private float cooldown_timer;
     public int DASH_COUNT = 1;
     [SerializeField] int REMAINING_DASHES = 1;
+    public SpriteRenderer shoulderSprite;
+    public Sprite normalShoulders;
+    public Sprite invShoulders;
+
     void Start()
     {
         alice = GetComponent<PlayerControl>();
@@ -110,15 +114,16 @@ public class DashController : BlackJackAffected
         {
             invincibility_timer -= Time.deltaTime;
 
-            //PLACEHOLDER TO INDICATE INV
-            GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
+            // Display invincible shoulder sprite
+            shoulderSprite.sprite = invShoulders;
         }
         if (alice.isInvincible && invincibility_timer <= 0f)
         {
             invincibility_timer = INVINCIBILITY_DURATION;
             alice.isInvincible = false;
 
-            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            // Display vulnerable shoulder sprite
+            shoulderSprite.sprite = normalShoulders;
 
         }
     }
