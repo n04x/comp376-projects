@@ -7,8 +7,8 @@ public class BossBehavior : MonoBehaviour
     public float timer;
     public float moveTimer;
     public float moveTimerLeft;
-    float bossCurrentHP = 25;
-    float bossMaxHP = 25;
+    float bossCurrentHP;
+    float bossMaxHP = 25 + NextLevel.currentLevel;
 
     // Visuals
     public ParticleSystem normalBeat;
@@ -42,7 +42,7 @@ public class BossBehavior : MonoBehaviour
     //Attacks
     bool shootBeam = false;
     [SerializeField]
-    public GameObject bullet, beamPrefab, beamAOEPrefab, beamFollow;
+    public GameObject bullet, beamPrefab, beamAOEPrefab, beamFollow, nextLevelPrefab;
     Quaternion rotation;
     float bulletSpeed = 10f;
     bool actionFinish = false;
@@ -65,7 +65,6 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
-
     //Start is called before the first frame update
     void Start()
     {
@@ -77,6 +76,7 @@ public class BossBehavior : MonoBehaviour
         rotation = Quaternion.Euler(0, 180, 0);
         direction = new Vector2(0f, 1f) * bulletSpeed;
         direction1 = new Vector2(1f, 0f) * bulletSpeed;
+        bossCurrentHP = bossMaxHP;
     }
 
     //Update is called once per frame
@@ -90,10 +90,10 @@ public class BossBehavior : MonoBehaviour
         if (movingBool == true)
         {
             movingUpdate();
-            // Debug.Log(movingBool);
+            //Debug.Log(movingBool);
         }
 
-        // Debug.Log(bossCurrentHP);
+        //Debug.Log(bossCurrentHP);
         switch (state)
         {
             case State.IDLE:
@@ -168,13 +168,13 @@ public class BossBehavior : MonoBehaviour
         {
             state = (State)Random.Range(1, 5);
             actionFinish = false;
-            // Debug.Log(state);
+            //Debug.Log(state);
         }
         else
         {
             state = (State)Random.Range(3, 5);
             actionFinish = false;
-            // Debug.Log(state);
+            //Debug.Log(state);
         }
     }
     
@@ -308,7 +308,7 @@ public class BossBehavior : MonoBehaviour
         //die when reach 0
 
         animator.SetBool("isDead", true);
-            //Destroy(gameObject);   
+        //Destroy(gameObject);
     }
 
     //Moving phase shooting
@@ -342,10 +342,17 @@ public class BossBehavior : MonoBehaviour
         bossCurrentHP -= value;
         if (bossCurrentHP <= 0)
         {
+<<<<<<< HEAD
+            GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);   
             ScoreController.Increment(ScoreController.BOSS_SCORE);
-
+=======
+            //GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
+            NextLevel.currentLevel++;
+            Debug.Log("currentLevel: " + NextLevel.currentLevel);
+            Application.LoadLevel(1);
+>>>>>>> e15f8a033e55bc15ba1f38e8c7b2def55bf56ebd
             Destroy(gameObject);
-
         }
         else if (bossCurrentHP <= bossMaxHP/2) 
         {
@@ -358,7 +365,7 @@ public class BossBehavior : MonoBehaviour
     {
         if (other.gameObject.name.Contains("room"))
         {
-            Debug.Log("bump");
+            //Debug.Log("bump");
             movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         }
 
@@ -373,7 +380,7 @@ public class BossBehavior : MonoBehaviour
     {
         if (other.gameObject.name.Contains("room"))
         {
-            Debug.Log("bump");
+            //Debug.Log("bump");
             movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         }
     }

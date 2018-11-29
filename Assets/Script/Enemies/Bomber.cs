@@ -59,6 +59,7 @@ public class Bomber : MonoBehaviour
         nextShot = Time.time;
         EnemyRngWalk = GetComponent<EnemyRandomWalk>();
         rb2d = GetComponent<Rigidbody2D>();
+        enemyHP = 4 + NextLevel.currentLevel;
     }
 
     // Update is called once per frame
