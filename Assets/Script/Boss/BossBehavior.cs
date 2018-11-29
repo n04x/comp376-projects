@@ -10,6 +10,9 @@ public class BossBehavior : MonoBehaviour
     float bossCurrentHP;
     float bossMaxHP = 25 + NextLevel.currentLevel;
 
+    public GameObject shootSound, aoeSound;
+    bool playBeamSound = true;
+
     // Visuals
     public ParticleSystem normalBeat;
     public ParticleSystem criticalBeat;
@@ -82,6 +85,8 @@ public class BossBehavior : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
+        
+    
 
         //Debug.Log(actionFinish);
         timer += Time.deltaTime;
@@ -219,11 +224,19 @@ public class BossBehavior : MonoBehaviour
         // movement = Vector2.zero;
         movingBool = true;
 
+        if (playBeamSound == true)
+        {
+            if (aoeSound != null) Instantiate(aoeSound);
+            playBeamSound = false;
+        }
+
+        
+
         if (timer > 3.0f)
         {
             GameObject beamPrefab0 = Instantiate(beamPrefab, transform.position, Quaternion.identity);
             beamPrefab0.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y);
-            
+
             GameObject beamPrefab1 = Instantiate(beamPrefab, transform.position, Quaternion.identity);
             beamPrefab1.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, -direction.y);
 
@@ -238,6 +251,7 @@ public class BossBehavior : MonoBehaviour
                 timer = 0;
                 shootBeam = false;
                 actionFinish = true;
+                playBeamSound = true;
             }
         }
     }
@@ -248,14 +262,21 @@ public class BossBehavior : MonoBehaviour
         //movement = Vector2.zero;
         movingBool = true;
 
+
         if (timer > 3.0f)
         {
             Instantiate(beamAOEPrefab, transform.position, Quaternion.identity);
+            if (playBeamSound == true)
+            {
+                if (aoeSound != null) Instantiate(aoeSound);
+                playBeamSound = false;
+            }
             if (timer > 6)
             {
                 timer = 0;
                 shootBeam = false;
                 actionFinish = true;
+                playBeamSound = true;
             }
         }
     }
@@ -269,12 +290,18 @@ public class BossBehavior : MonoBehaviour
         if (timer > 3.0f)
         {
             Instantiate(beamFollow, transform.position, Quaternion.identity);
+            if (playBeamSound == true)
+            {
+                if (aoeSound != null) Instantiate(aoeSound);
+                playBeamSound = false;
+            }
 
             if (timer > 6)
             {
                 timer = 0;
                 shootBeam = false;
                 actionFinish = true;
+                playBeamSound = true;
             }
         }
     }
@@ -314,6 +341,8 @@ public class BossBehavior : MonoBehaviour
     //Moving phase shooting
     private void shoot()
     {
+        playBeamSound = true;
+
         if (numbShots == 0)
         {
             // Debug.Log("DELAY: " + timer);
@@ -327,6 +356,7 @@ public class BossBehavior : MonoBehaviour
         {
             //Debug.Log("SHOOT: " + timer);
             Instantiate(bullet, transform.position, Quaternion.identity);
+            if (shootSound != null) Instantiate(shootSound);
             numbShots--;
             timer = 0;
         }

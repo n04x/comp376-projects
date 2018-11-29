@@ -46,8 +46,12 @@ public class BlackJackController : MonoBehaviour
     public Text clubs_text;
     public Text spades_text;
 
+    public GameObject hitSound, ventSound, bjSound;
+    bool playBJSound;
+
     private void Start()
     {
+        playBJSound = true;
         // Set colors
         cyan = new Color (0.0f, 0.8f, 1.0f);
         magenta = new Color (1.0f, 0.0f, 98.0f/255.0f);
@@ -180,6 +184,11 @@ public class BlackJackController : MonoBehaviour
 
     void Vent()
     {
+        if (!over)
+        {
+            if (ventSound != null) Instantiate(ventSound);
+        }
+
         if (over)
         {
             pc_alice.takeDamage();
@@ -209,6 +218,11 @@ public class BlackJackController : MonoBehaviour
     }
     void Hit()
     {
+        if (!over)
+        {
+            if (hitSound != null) Instantiate(hitSound);
+        }
+
         if (over)
         {
             pc_alice.takeDamage();
@@ -264,10 +278,20 @@ public class BlackJackController : MonoBehaviour
 
     void BlackJack()
     {
+    
         bool blackjack;
         if (blackjack_score == 21)
         {
             blackjack = true;
+
+            if (playBJSound = true)
+            {
+                if (bjSound != null) Instantiate(bjSound);
+                playBJSound = false;
+
+            }
+
+            
             for (int i = 0; i < kind.Length; i++)
             {
                 kind[i] = 21;
@@ -276,6 +300,7 @@ public class BlackJackController : MonoBehaviour
         else
         {
             blackjack = false;
+            playBJSound = true;
         }
         hearts.SetBlackJack(blackjack);
         diamonds.SetBlackJack(blackjack);

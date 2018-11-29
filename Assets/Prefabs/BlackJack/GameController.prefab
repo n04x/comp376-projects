@@ -43,6 +43,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8d0bb64f8bed144be81d991fe000e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player_deck: {fileID: 0}
   deck: {fileID: 0}
+  burst_meter: {fileID: 0}
+  hearts: {fileID: 0}
+  diamonds: {fileID: 0}
+  clubs: {fileID: 0}
+  spades: {fileID: 0}
+  kind: 00000000000000000000000000000000
+  beepStart: 10
+  beepCriticalStart: 5
+  beepInterval: 1
+  beepCriticalInterval: 0.5
+  flashLength: 0.05
   blackjack_text_score: {fileID: 0}
+  blackjack_timer_seconds: {fileID: 0}
+  blackjack_timer_decimals: {fileID: 0}
+  hearts_text: {fileID: 0}
+  diamonds_text: {fileID: 0}
+  clubs_text: {fileID: 0}
+  spades_text: {fileID: 0}
+  hitSound: {fileID: 7243544742902130232, guid: 177ebf021493647408ac6dea6b098a33,
+    type: 3}
+  ventSound: {fileID: 7243544742902130232, guid: 2b70e3598f1dfbf43bcd7eba3de63b0f,
+    type: 3}
+  bjSound: {fileID: 7243544742902130232, guid: f6113b145ec97874aa2ef95f8c187133, type: 3}
