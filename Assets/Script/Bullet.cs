@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour {
         Destroy(gameObject, 3f);
 	}
 	
+    //Destroy bullet 
 	void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.name.Contains("Wall"))

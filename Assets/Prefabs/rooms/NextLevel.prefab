@@ -141,3 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9963ead3ca6022438494813049343ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedIncrease: 0.1
+  enemyBullet: {fileID: 1301529939427082054, guid: 61c7a86f42acaff439c53380778cf39c,
+    type: 3}
+  bulletFollow: {fileID: 128714455212876818, guid: faa868d1c3a6afd40ab6d18553763727,
+    type: 3}
+  bossBeam: {fileID: 8200347857712662300, guid: 2adc563688b2bb3438e196dfd4a0a51e,
+    type: 3}
+  enemyBulletAOE: {fileID: 4022244540878326952, guid: 977d313eff04d2b49a1d18c2e61194cf,
+    type: 3}

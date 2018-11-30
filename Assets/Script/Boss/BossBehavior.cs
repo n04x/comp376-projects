@@ -8,6 +8,7 @@ public class BossBehavior : MonoBehaviour
     public float moveTimer;
     public float moveTimerLeft;
     float bossCurrentHP;
+    public NextLevel nextLevel;
     float bossMaxHP = 25 + NextLevel.currentLevel;
 
     public GameObject shootSound, aoeSound;
@@ -27,13 +28,11 @@ public class BossBehavior : MonoBehaviour
     Vector2 direction;
     Vector2 direction1;
 
-    //Animation 
-    public Animator animator;
+    //Sprite shift 
     bool facingRight = false;
 
     //Random Movement
     public float accelerationTime = 2f;
-    //public float maxSpeed = 5f;
     private Vector2 movement;
     private float timeLeft;
 
@@ -72,7 +71,6 @@ public class BossBehavior : MonoBehaviour
     void Start()
     {
         beamPrefab.GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
@@ -85,20 +83,15 @@ public class BossBehavior : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        
-    
-
-        //Debug.Log(actionFinish);
         timer += Time.deltaTime;
         moveTimer += Time.deltaTime;
       
         if (movingBool == true)
         {
             movingUpdate();
-            //Debug.Log(movingBool);
         }
 
-        //Debug.Log(bossCurrentHP);
+        //Different boss phase
         switch (state)
         {
             case State.IDLE:
@@ -116,9 +109,6 @@ public class BossBehavior : MonoBehaviour
             case State.ATTACK_4:
                 attack4_Update();
                 break;
-           // case State.DIE:
-             //   die();
-               // break;
         }
         
         if(actionFinish == true)
@@ -159,54 +149,45 @@ public class BossBehavior : MonoBehaviour
         ATTACK_1,
         ATTACK_2,
         ATTACK_3,
-        ATTACK_4,
-        DIE
+        ATTACK_4
     }
 
     //Serialize so can access in inspector
     [SerializeField]
     public State state = State.IDLE;
 
+    //Phase 2 occur when half hp
     void RandomizeState()
     {
         if(bossCurrentHP <= (bossMaxHP / 2))
         {
             state = (State)Random.Range(1, 5);
             actionFinish = false;
-            //Debug.Log(state);
         }
         else
         {
             state = (State)Random.Range(3, 5);
             actionFinish = false;
-            //Debug.Log(state);
         }
     }
     
 
     //Different state of the boss
-    //
     void idleUpdate()
     {
         //Stop few seconds and aoe for few seconds
         movement = Vector2.zero;
         movingBool = false;
-        animator.SetBool("isRunning", false);
-        animator.SetBool("isDead", false);
         actionFinish = true;
     }
 
     void movingUpdate()
     {
         //Move boss and shoot at player at the same time
-        //Moving at random place in the room
         movingBool = true;
         randomX = Random.Range(-1f, 1f);
         randomY = Random.Range(-1f, 1f);
         moveTimerLeft -= Time.deltaTime;
-
-        animator.SetBool("isRunning", true);
-        animator.SetBool("isDead", false);
 
         if (moveTimerLeft <= 0)
         {
@@ -220,8 +201,7 @@ public class BossBehavior : MonoBehaviour
     //beam attack
     void attack1_Update()
     {
-        //laser beam multiple direction
-        // movement = Vector2.zero;
+        //Laser beam multiple direction
         movingBool = true;
 
         if (playBeamSound == true)
@@ -229,8 +209,6 @@ public class BossBehavior : MonoBehaviour
             if (aoeSound != null) Instantiate(aoeSound);
             playBeamSound = false;
         }
-
-        
 
         if (timer > 3.0f)
         {
@@ -258,10 +236,8 @@ public class BossBehavior : MonoBehaviour
 
     void attack2_Update()
     {
-        //AoE
-        //movement = Vector2.zero;
+        //AoE while moving
         movingBool = true;
-
 
         if (timer > 3.0f)
         {
@@ -281,11 +257,10 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+    //Shoot beam following the player
     void attack3_Update()
     {
         movingBool = true;
-        //movement = Vector2.zero;
-        //animator.SetBool("isRunning", false);
 
         if (timer > 3.0f)
         {
@@ -306,10 +281,9 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
-    //Aggro Attack - Rush and triple burst
+    //Aggro Attack - Randomly go to player + triple burst
     void attack4_Update()
     {
-        //movingBool = true;
         if (timer < 6)
         {
             if (target != null)
@@ -330,22 +304,16 @@ public class BossBehavior : MonoBehaviour
     {
         // Stop heartbeat
         criticalBeat.Stop();  
-
         movement = Vector2.zero;
-        //die when reach 0
-
-        animator.SetBool("isDead", true);
-        //Destroy(gameObject);
     }
 
-    //Moving phase shooting
+    //Moving phase shooting bullets
     private void shoot()
     {
         playBeamSound = true;
 
         if (numbShots == 0)
         {
-            // Debug.Log("DELAY: " + timer);
             if (timer > shotDelay)
             {
                 numbShots = 3;
@@ -354,7 +322,6 @@ public class BossBehavior : MonoBehaviour
         }
         else if (timer > firingRate)
         {
-            //Debug.Log("SHOOT: " + timer);
             Instantiate(bullet, transform.position, Quaternion.identity);
             if (shootSound != null) Instantiate(shootSound);
             numbShots--;
@@ -362,11 +329,13 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+    //Reduce boss Hp
     public void reduceBossHP()
     {
         reduceBossHP(1);
     }
 
+    //Reduce boss Hp with a value
     public void reduceBossHP(int value)
     {
         bossCurrentHP -= value;
@@ -375,10 +344,6 @@ public class BossBehavior : MonoBehaviour
             GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);   
             ScoreController.Increment(ScoreController.BOSS_SCORE);
-            //GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
-           // NextLevel.currentLevel++;
-          //  Debug.Log("currentLevel: " + NextLevel.currentLevel);
-            //Application.LoadLevel(1);
             Destroy(gameObject);
         }
         else if (bossCurrentHP <= bossMaxHP/2) 
@@ -388,15 +353,18 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+
+    //Enemy will reassign different direction
+    //when collide with wall in the room
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name.Contains("room"))
         {
-            //Debug.Log("bump");
             movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         }
 
-        if (other.gameObject.layer == 9)//alice tools
+        //alice tools
+        if (other.gameObject.layer == 9)
         {
             AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
             reduceBossHP(aw.damage);
@@ -407,7 +375,6 @@ public class BossBehavior : MonoBehaviour
     {
         if (other.gameObject.name.Contains("room"))
         {
-            //Debug.Log("bump");
             movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         }
     }

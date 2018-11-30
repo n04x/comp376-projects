@@ -9,7 +9,6 @@ public class Bomber : MonoBehaviour
     [SerializeField] GameObject explosion_audio_prefab;
 
     //EnemyMovement
-    //private Animator animator;
     public float speed;
     private Transform target;
     protected Vector2 direction;
@@ -29,12 +28,11 @@ public class Bomber : MonoBehaviour
     GameObject ExplosionPrefab;
 
     private PlayerControl playerContScript;
-
-    private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
+    private Rigidbody2D rb2d;      
     [SerializeField] int enemyHP = 5;
-
     bool triggered = false;
     float explosionTimer = 1f;
+
     //Getter and setter to get players position
     public Transform Target
     {
@@ -51,10 +49,8 @@ public class Bomber : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Added
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
-        //animator = GetComponent<Animator>();
         firingRate = 1f;
         nextShot = Time.time;
         EnemyRngWalk = GetComponent<EnemyRandomWalk>();
@@ -65,12 +61,10 @@ public class Bomber : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //animatedDirection(direction);
         timer += Time.deltaTime;
 
         if (target != null)
         {
-            //direction = Vector2.zero;
             RunToTarget();
         }
         else if (target == null)
@@ -78,13 +72,6 @@ public class Bomber : MonoBehaviour
             EnemyRngWalk.FollowRandomDirection();
         }
 
-    }
-
-    //Set animation for all 4 direction using animator and variable
-    private void animatedDirection(Vector2 direction)
-    {
-        //animator.SetFloat("x", direction.x);
-        //animator.SetFloat("y", direction.y);
     }
 
     //When the player is collided with the enemy it will run the opposite way
@@ -97,16 +84,20 @@ public class Bomber : MonoBehaviour
         }
     }
 
+    //Get the enemy Hp
     public int getEnemyHP()
     {
         return enemyHP;
     }
+
+    //Reduce enemy Hp 
     public void reduceEnemyHP()
     {
 
         reduceEnemyHP(1);
     }
 
+    //Reduce enemy Hp with value
     public void reduceEnemyHP(int value)
     {
         enemyHP -= value;
@@ -115,10 +106,11 @@ public class Bomber : MonoBehaviour
         if (enemyHP <= 0)
         {
             ScoreController.Increment(ScoreController.PAWN_SCORE);
-
             Die();
         }
     }
+
+    //Destroy the bomber
     public void Die()
     {
         Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
@@ -127,8 +119,6 @@ public class Bomber : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-
-
         if (other.gameObject.tag == "Player")
         {
             triggered = true;
@@ -143,8 +133,6 @@ public class Bomber : MonoBehaviour
             {
                 ScoreController.Increment(ScoreController.PAWN_SCORE);
                 Die();
-
-
             }
             AliceWeapon aw = other.gameObject.GetComponent<AliceWeapon>();
             reduceEnemyHP(aw.damage);
@@ -154,7 +142,6 @@ public class Bomber : MonoBehaviour
     void OnCollisionStay2D(Collision2D other)
     {
         explosionCheck();
-
     }
     void explosionCheck()
     {

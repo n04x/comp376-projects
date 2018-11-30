@@ -6,11 +6,6 @@ public class BossRange : MonoBehaviour
 {
     [SerializeField] private BossBehavior parent;
 
-    void Start()
-    {
-        // parent = GetComponentInChildren<Enemy>();
-    }
-
     void Update()
     {
         if (parent != null)
@@ -32,7 +27,6 @@ public class BossRange : MonoBehaviour
             parent.Target = col.transform;
         }
     }
-
     private void OnTriggerExit2D(Collider2D col)
     {
         parent.Target = null;
