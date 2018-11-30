@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletFollow : MonoBehaviour
 {
-    float bulletSpeed = 5f;
+    float bulletSpeed = 7.5f;
     private Rigidbody2D rb2d;
 
     PlayerControl target;
@@ -23,7 +23,7 @@ public class BulletFollow : MonoBehaviour
         playerContScript = thePlayer.GetComponent<PlayerControl>();
 
         direction = (target.transform.position - transform.position).normalized * bulletSpeed;
-        rb2d.velocity = new Vector2(direction.x, direction.y);
+        rb2d.velocity = new Vector2(direction.x, direction.y).normalized* bulletSpeed;
     }
 
     void OnTriggerEnter2D(Collider2D other)
