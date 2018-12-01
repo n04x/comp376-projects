@@ -495,6 +495,8 @@ public class Room : MonoBehaviour
       int l1 = layout.GetComponentsInChildren<Enemy>().Length + layout.GetComponentsInChildren<EnemyTurret>().Length + layout.GetComponentsInChildren<Bomber>().Length + layout.GetComponentsInChildren<BossBehavior>().Length;
       if (l1 > 0)
       {
+        int bosscheck = layout.GetComponentsInChildren<BossBehavior>().Length;
+        if(bosscheck>0)
         audioController.EnterBossRoom();
         LockDown();
       }
