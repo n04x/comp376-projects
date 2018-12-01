@@ -55,6 +55,7 @@ public class BossBehavior : MonoBehaviour
     private Vector2 playerDirection;
     public float speedToPlayer;
     bool movingBool = false;
+     AudioController audioController;
     public Transform Target
     {
         get
@@ -78,6 +79,9 @@ public class BossBehavior : MonoBehaviour
         direction = new Vector2(0f, 1f) * bulletSpeed;
         direction1 = new Vector2(1f, 0f) * bulletSpeed;
         bossCurrentHP = bossMaxHP;
+
+        GameObject ac = GameObject.FindWithTag("MainCamera");
+        audioController = ac.GetComponent<AudioController>();
     }
 
     //Update is called once per frame
@@ -342,8 +346,8 @@ public class BossBehavior : MonoBehaviour
         if (bossCurrentHP <= 0)
         {
             GameObject nextLevelPortal = Instantiate(nextLevelPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject);   
             ScoreController.Increment(ScoreController.BOSS_SCORE);
+            audioController.setDefaultMusic(true);
             Destroy(gameObject);
         }
         else if (bossCurrentHP <= bossMaxHP/2) 

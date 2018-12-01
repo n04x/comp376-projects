@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5464,6 +5464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossAudio: {fileID: 8300000, guid: c5fed70372910314daab98d02af3f68e, type: 3}
+  normalAudio: {fileID: 8300000, guid: 0860bf245a927dc43815fe8ae32073ba, type: 3}
 --- !u!1 &138934698 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2501808668457213388, guid: 36f89cc6ddd50ab4991b943164447cb9,
@@ -6420,7 +6421,7 @@ PrefabInstance:
     - target: {fileID: 6817218954154046585, guid: e92d0eb647c3cd44faf694821da89995,
         type: 3}
       propertyPath: MaxRoomCount
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6817218954154046585, guid: e92d0eb647c3cd44faf694821da89995,
         type: 3}
