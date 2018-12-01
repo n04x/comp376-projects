@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5269,6 +5269,7 @@ GameObject:
   - component: {fileID: 132654216}
   - component: {fileID: 132654219}
   - component: {fileID: 132654220}
+  - component: {fileID: 132654221}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5450,6 +5451,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &132654221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132654215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373c17c9d1c5f0e8eb86ae3e9aeecfad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossAudio: {fileID: 8300000, guid: c5fed70372910314daab98d02af3f68e, type: 3}
 --- !u!1 &138934698 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2501808668457213388, guid: 36f89cc6ddd50ab4991b943164447cb9,
@@ -6406,7 +6420,7 @@ PrefabInstance:
     - target: {fileID: 6817218954154046585, guid: e92d0eb647c3cd44faf694821da89995,
         type: 3}
       propertyPath: MaxRoomCount
-      value: 15
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6817218954154046585, guid: e92d0eb647c3cd44faf694821da89995,
         type: 3}

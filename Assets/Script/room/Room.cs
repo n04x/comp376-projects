@@ -9,6 +9,7 @@ public struct Exits
 
 public class Room : MonoBehaviour
 {
+  AudioController audioController;
   public Vector2 dimensions;
   public Exits exits;
   public float Scale;
@@ -116,7 +117,8 @@ public class Room : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-
+    GameObject ac = GameObject.FindWithTag("MainCamera");
+    audioController = ac.GetComponent<AudioController>();
   }
 
   // Update is called once per frame
@@ -493,6 +495,7 @@ public class Room : MonoBehaviour
       int l1 = layout.GetComponentsInChildren<Enemy>().Length + layout.GetComponentsInChildren<EnemyTurret>().Length + layout.GetComponentsInChildren<Bomber>().Length + layout.GetComponentsInChildren<BossBehavior>().Length;
       if (l1 > 0)
       {
+        audioController.EnterBossRoom();
         LockDown();
       }
     }
