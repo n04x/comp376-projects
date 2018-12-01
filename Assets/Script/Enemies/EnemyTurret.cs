@@ -7,7 +7,6 @@ public class EnemyTurret : MonoBehaviour
     [SerializeField] GameObject hit_audio_prefab;
     
     //EnemyMovement
-    //private Animator animator;
     public float speed;
     public float rotatingSpeed;
     private Transform target;
@@ -24,7 +23,7 @@ public class EnemyTurret : MonoBehaviour
     //GameObject ExplosionPrefab;
 
     PlayerControl playerContScript;
-    private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
+    private Rigidbody2D rb2d;       
     public int enemyHP;
 
     AudioSource shootSound;
@@ -45,7 +44,6 @@ public class EnemyTurret : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Added
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
         firingRate = 1f - (NextLevel.currentLevel * 0.05f);

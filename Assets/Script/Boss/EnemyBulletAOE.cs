@@ -5,12 +5,11 @@ using UnityEngine;
 public class EnemyBulletAOE : MonoBehaviour
 {
 
-    float bulletSpeed = 5f;
+    public float bulletSpeed = 5f;
     private Rigidbody2D rb2d;
 
     PlayerControl target;
     Vector2 direction;
-
     private PlayerControl playerContScript;
 
 
@@ -19,24 +18,20 @@ public class EnemyBulletAOE : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         target = GameObject.FindObjectOfType<PlayerControl>();
-
         GameObject thePlayer = GameObject.Find("Aris");
         playerContScript = thePlayer.GetComponent<PlayerControl>();
 
+        //Shoots bullet in different direction
         direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * bulletSpeed;
-
         rb2d.velocity = new Vector2(direction.x, direction.y);
     }
 
-        void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
         if (other.gameObject.name.Equals("Aris"))
         {
-            //Cannot manually set the damage taken
-            //Debug.Log(playerContScript.current_hp); 
             playerContScript.takeDamage(transform.position,10);
         }
-                    Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

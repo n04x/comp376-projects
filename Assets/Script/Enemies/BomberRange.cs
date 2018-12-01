@@ -7,11 +7,6 @@ public class BomberRange : MonoBehaviour
     // Start is called before the first frame update [SerializeField] private Enemy parent; 
    [SerializeField] private Bomber parent; 
 
-    void Start()
-    {
-       // parent = GetComponentInChildren<Enemy>();
-    }
-
     void Update(){
         if (parent != null)
         {
@@ -32,7 +27,6 @@ public class BomberRange : MonoBehaviour
             parent.Target = col.transform;
         }
     }
-
     private void OnTriggerExit2D(Collider2D col)
     {
         parent.Target = null;

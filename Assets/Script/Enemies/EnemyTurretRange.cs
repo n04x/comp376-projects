@@ -16,7 +16,6 @@ public class EnemyTurretRange : MonoBehaviour
         if (col.tag == "Player")
         {
             parent.Target = col.transform;
-           // Debug.Log("Player inside ....");
         }
     }
     private void OnTriggerStay2D(Collider2D col)
@@ -24,7 +23,6 @@ public class EnemyTurretRange : MonoBehaviour
         if (col.tag == "Player")
         {
             parent.Target = col.transform;
-           // Debug.Log("Player inside ....111111111111");
         }
     }
 

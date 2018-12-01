@@ -27,10 +27,9 @@ public class Enemy : MonoBehaviour {
 
     //RandomWalk Script
     EnemyRandomWalk EnemyRngWalk;
-
     AudioSource shootSound;
 
-    private Rigidbody2D rb2d;       //Store a reference to the Rigidbody2D component required to use 2D Physics.
+    private Rigidbody2D rb2d;      
     int enemyHP;
     //Getter and setter to get players position
     public Transform Target
@@ -57,23 +56,13 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        animatedDirection(direction);
         timer += Time.deltaTime;
         shootSound = GetComponent<AudioSource>();
 
         if (target != null)
         {
             RunFromTarget();
-
-            if (shootBeam == true)
-                beam();
-
-
-            else
-                shoot();
-
-            //beam();
-            //beamAOE();
+            shoot();
         }
         else if (target == null)
         {
@@ -81,17 +70,9 @@ public class Enemy : MonoBehaviour {
         }
 	}
 
-    //Set animation for all 4 direction using animator and variable
-    private void animatedDirection(Vector2 direction)
-    {
-        animator.SetFloat("x", direction.x);
-        animator.SetFloat("y", direction.y);
-    }
-
     //When the player is collided with the enemy it will run the opposite way
     public void RunFromTarget()
     {
-
         if (target != null)
         {
             direction = (target.transform.position - transform.position).normalized;
@@ -100,86 +81,27 @@ public class Enemy : MonoBehaviour {
             float rotationDeg = Mathf.Atan2(transform.position.y - target.transform.position.y, transform.position.x - target.transform.position.x) * Mathf.Rad2Deg + 90f;
             transform.eulerAngles = new Vector3(0f, 0f, Mathf.MoveTowardsAngle(transform.eulerAngles.z, rotationDeg, Time.deltaTime * rotatingSpeed));
             shoot();
-
         }
     }
 
     //Base Attack
     private void shoot()
-    {
-        
+    {     
         if (numbShots == 0)
         {
-            //Debug.Log("DELAY: " + timer);
-
             if (timer > shotDelay)
             {
                 numbShots = 3;
                 shootBeam = true;
-            }
-                
+            }          
         }
-        
-
         else if (timer > firingRate)
         {
-            //Debug.Log("SHOOT: " + timer);
             Instantiate(bullet, transform.position, Quaternion.identity);
             shootSound.Play();
             numbShots--;
             timer = 0;
         }
-
-    }
-
-    //Beam attack
-    private void beam()
-    {
-
-        if (timer > 3.0f)
-        {
-            Instantiate(beamPrefab, transform.position, Quaternion.identity);
-
-            if (playBeamSound == true)
-            {
-                if (aoeSound != null) Instantiate(aoeSound);
-                playBeamSound = false;
-            }
-            
-
-            if (timer > 6)
-            {
-                timer = 0;
-                shootBeam = false;
-                playBeamSound = true;
-            }
-                
-        }
-
-    }
-
-    //Beam attack
-    private void beamAOE()
-    {
-
-        if (timer > 3.0f)
-        {
-            Instantiate(beamPrefab, transform.position, Quaternion.identity);
-
-            if (playBeamSound == true)
-            {
-                if (aoeSound != null) Instantiate(aoeSound);
-                playBeamSound = false;
-            }
-
-            if (timer > 6)
-            {
-                timer = 0;
-                playBeamSound = false;
-            }
-                
-        }
-
     }
 
     public int getEnemyHP()
@@ -187,8 +109,7 @@ public class Enemy : MonoBehaviour {
         return enemyHP;
     }
     public void reduceEnemyHP()
-    {
-        
+    {  
         reduceEnemyHP (1);
     }
 
@@ -198,8 +119,6 @@ public class Enemy : MonoBehaviour {
 
         if(enemyHP <=0)
         Die();
-
-
     }
     public void Die(){
         ScoreController.Increment(ScoreController.KNIGHT_SCORE);

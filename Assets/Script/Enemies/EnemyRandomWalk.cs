@@ -14,8 +14,7 @@ public class EnemyRandomWalk : MonoBehaviour {
     protected Vector2 direction;
     private Animator animator;
     Enemy enemy;
-
-    
+   
     Rigidbody2D rb;
     // Use this for initialization
     void Start () {
@@ -32,15 +31,7 @@ public class EnemyRandomWalk : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-        animatedDirection(direction);
         timer += Time.deltaTime;
-    }
-    
-    private void animatedDirection(Vector2 direction)
-    {
-        direction = (areaTarget.transform.position - transform.position).normalized;
-        animator.SetFloat("x", direction.x);        animator.SetFloat("x", direction.x);
-        animator.SetFloat("y", direction.y);
     }
 
     public void FollowRandomDirection()
@@ -56,7 +47,6 @@ public class EnemyRandomWalk : MonoBehaviour {
             {
                 if (timer <= 4)
                 {
-                    animatedDirection(direction);
                     areaTarget.position = new Vector2(Random.Range(minCoordX, maxCoordX), Random.Range(minCoordY, maxCoordY));
                 }
                 else
